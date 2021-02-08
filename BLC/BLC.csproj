@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnyimMemcachedCore" Version="2.5.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DALC\DALC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Crypto">
+      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\CB\DLL\Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Hasher">
+      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\CB\DLL\Hasher.dll</HintPath>
+    </Reference>
+    <Reference Include="Tools">
+      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\CB\DLL\Tools.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

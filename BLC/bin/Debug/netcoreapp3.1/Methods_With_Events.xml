@@ -1,0 +1,8 @@
+<EVENTS>
+<EVENT>
+<ENTRY>Get_Section_By_OWNER_ID</ENTRY>
+</EVENT>
+<EVENT>
+<ENTRY>Get_Team_member_By_OWNER_ID</ENTRY>
+</EVENT>
+</EVENTS>

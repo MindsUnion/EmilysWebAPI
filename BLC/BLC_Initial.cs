@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Crypto;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -103,12 +105,149 @@ namespace BLC
             #region Declaration And Initialization Section.
             #endregion
             #region Body Section.
+            this.OnPostEvent_Get_Section_By_SECTION_ID += BLC_OnPostEvent_Get_Section_By_SECTION_ID;
+            this.OnPostEvent_Get_Team_member_By_OWNER_ID += BLC_OnPostEvent_Get_Team_member_By_OWNER_ID;
+           this.OnPreEvent_Edit_Team_member += BLC_OnPreEvent_Edit_Team_member;
+            this.OnPostEvent_Edit_Section += BLC_OnPostEvent_Edit_Section;
+            this.OnPostEvent_Get_Team_member_By_EMAIL += BLC_OnPostEvent_Get_Team_member_By_EMAIL;
             Register_Uploaded_Events_Handlers();
             #endregion
-        }                                                                                                                                                                 
-        #endregion
-        #region IDisposable Members
-        public void Dispose()
+        }
+
+       
+
+        private void BLC_OnPostEvent_Edit_Section(Section i_Section, Enum_EditMode i_Enum_EditMode)
+        {
+           if (i_Section.My_Uploaded_files.Count > 1)
+            {
+                Params_Delete_Uploaded_file deleteUploadedFile = new Params_Delete_Uploaded_file();
+                deleteUploadedFile.UPLOADED_FILE_ID = i_Section.My_Uploaded_files[0].UPLOADED_FILE_ID;
+                Delete_Uploaded_file(deleteUploadedFile);
+            }
+        }
+
+        private void BLC_OnPreEvent_Edit_Team_member(Team_member i_Team_member, Enum_EditMode i_Enum_EditMode)
+        {
+
+
+            User oUser = new User();
+            MiniCryptoHelper oCrypto = new MiniCryptoHelper();
+            switch (i_Enum_EditMode)
+            {
+                case Enum_EditMode.Add:
+                    var oQuery = _AppContext.Get_Team_member_By_EMAIL(i_Team_member.EMAIL);
+                    if (oQuery.Count == 1)
+                    {
+                        throw new BLCException("The email address is already taken. Please choose another one.");
+                    }
+                    else
+                    {
+                        oUser.USER_ID = -1;
+                        oUser.OWNER_ID = 1;
+                        oUser.FULLNAME = i_Team_member.MEMBER_NAME;
+                        oUser.USERNAME = i_Team_member.EMAIL;
+                        i_Team_member.PASSWORD = oCrypto.Encrypt(i_Team_member.PASSWORD);
+                        oUser.PASSWORD = i_Team_member.PASSWORD;
+                        oUser.USER_TYPE_CODE = "001";
+                        oUser.IS_ACTIVE = false;
+                        Edit_User(oUser);
+
+                        Params_Verify_Account oParams = new Params_Verify_Account();
+                        oParams.User_ID = oUser.USER_ID;
+                        oParams.UserName = oUser.USERNAME;
+
+                        Verify_Account(oParams);
+                    }
+                    break;
+
+                case Enum_EditMode.Update:
+
+                    break;
+            }
+        }
+
+        private void BLC_OnPostEvent_Get_Section_By_SECTION_ID(ref Section i_Result, Params_Get_Section_By_SECTION_ID i_Params_Get_Section_By_SECTION_ID)
+        {
+
+            Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY sectionWithFile = new Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY();
+            sectionWithFile.REL_KEY = i_Result.SECTION_ID;
+            sectionWithFile.REL_ENTITY = "[TBL_SECTION]";
+           
+
+            Uploaded_file oUploaded_file = new Uploaded_file();
+            List<Uploaded_file> oList_Uploaded_files = new List<Uploaded_file>();
+            string str_WEB_PATH = ConfigurationManager.AppSettings["WEB_PATH"].ToString();
+            if (i_Result != null)
+            {
+                i_Result.My_Uploaded_files = Get_Uploaded_file_By_REL_ENTITY_REL_KEY(sectionWithFile);
+                if (i_Result.My_Uploaded_files != null)
+                {
+                    foreach (var oRow_Uploaded_file in i_Result.My_Uploaded_files)
+                    {
+                        oRow_Uploaded_file.My_URL = string.Format("{0}/Files/Uploaded/{1}.{2}", str_WEB_PATH, oRow_Uploaded_file.UPLOADED_FILE_ID.ToString(), oRow_Uploaded_file.EXTENSION);
+                    }
+                }
+            }
+        }
+
+        private void BLC_OnPostEvent_Get_Team_member_By_OWNER_ID(ref List<Team_member> i_Result, Params_Get_Team_member_By_OWNER_ID i_Params_Get_Team_member_By_OWNER_ID)
+        {
+            Uploaded_file oUploaded_file = new Uploaded_file();
+            List<Uploaded_file> oList_Uploaded_files = new List<Uploaded_file>();
+            Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY teamMemberProfile = new Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY();
+            teamMemberProfile.REL_ENTITY = "[TBL_TEAM_MEMBER]";
+
+            string str_WEB_PATH = ConfigurationManager.AppSettings["WEB_PATH"].ToString();
+            foreach (var item in i_Result)
+            {
+                teamMemberProfile.REL_KEY = item.TEAM_MEMBER_ID;
+                if (i_Result != null)
+                {
+
+                    item.My_Uploaded_files = Get_Uploaded_file_By_REL_ENTITY_REL_KEY(teamMemberProfile);
+                    if (item.My_Uploaded_files != null)
+                    {
+                        foreach (var oRow_Uploaded_file in item.My_Uploaded_files)
+                        {
+                            oRow_Uploaded_file.My_URL = string.Format("{0}/Files/Uploaded/{1}.{2}", str_WEB_PATH, oRow_Uploaded_file.UPLOADED_FILE_ID.ToString(), oRow_Uploaded_file.EXTENSION);
+                        }
+                    }
+                }
+            }
+        }
+                
+            
+
+            private void BLC_OnPostEvent_Get_Team_member_By_EMAIL(List<Team_member> i_Result, Params_Get_Team_member_By_EMAIL i_Params_Get_Team_member_By_EMAIL)
+            {
+
+            Uploaded_file oUploaded_file = new Uploaded_file();
+            List<Uploaded_file> oList_Uploaded_files = new List<Uploaded_file>();
+            Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY teamMemberProfile = new Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY();
+            teamMemberProfile.REL_ENTITY = "[TBL_TEAM_MEMBER]";
+
+            string str_WEB_PATH = ConfigurationManager.AppSettings["WEB_PATH"].ToString();
+            foreach (var item in i_Result)
+            {
+                teamMemberProfile.REL_KEY = item.TEAM_MEMBER_ID;
+                if (i_Result != null)
+                {
+
+                    item.My_Uploaded_files = Get_Uploaded_file_By_REL_ENTITY_REL_KEY(teamMemberProfile);
+                    if (item.My_Uploaded_files != null)
+                    {
+                        foreach (var oRow_Uploaded_file in item.My_Uploaded_files)
+                        {
+                            oRow_Uploaded_file.My_URL = string.Format("{0}/Files/Uploaded/{1}.{2}", str_WEB_PATH, oRow_Uploaded_file.UPLOADED_FILE_ID.ToString(), oRow_Uploaded_file.EXTENSION);
+                        }
+                    }
+                }
+            }
+        }
+
+            #endregion
+            #region IDisposable Members
+            public void Dispose()
         {
             #region Body Section.
             #endregion
@@ -208,7 +347,7 @@ namespace BLC
     {
         #region Properties
         public string Code { get; set; }
-        public string Content { get; set; }
+        public string Content { get; set; } 
         #endregion
     }
     #endregion

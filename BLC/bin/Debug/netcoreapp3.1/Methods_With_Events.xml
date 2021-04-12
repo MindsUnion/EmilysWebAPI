@@ -1,8 +1,11 @@
 <EVENTS>
 <EVENT>
-<ENTRY>Get_Section_By_OWNER_ID</ENTRY>
+<ENTRY>Edit_Team_member</ENTRY>
 </EVENT>
 <EVENT>
-<ENTRY>Get_Team_member_By_OWNER_ID</ENTRY>
+<ENTRY>Edit_Section</ENTRY>
+</EVENT>
+<EVENT>
+<ENTRY>Get_Team_member_By_EMAIL</ENTRY>
 </EVENT>
 </EVENTS>

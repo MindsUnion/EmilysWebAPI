@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="EnyimMemcachedCore" Version="2.5.3" />
+    <PackageReference Include="MailKit" Version="2.11.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
@@ -16,14 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Crypto">
-      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\CB\DLL\Crypto.dll</HintPath>
+    <Reference Include="CoreCrypto">
+      <HintPath>..\..\..\Full Stack Development Training\CODE BOOSTER\CB\Core\DLL\CoreCrypto.dll</HintPath>
     </Reference>
-    <Reference Include="Hasher">
-      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\CB\DLL\Hasher.dll</HintPath>
+    <Reference Include="CoreHasher">
+      <HintPath>..\..\..\Full Stack Development Training\CODE BOOSTER\CB\Core\DLL\CoreHasher.dll</HintPath>
     </Reference>
-    <Reference Include="Tools">
-      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\CB\DLL\Tools.dll</HintPath>
+    <Reference Include="CoreTools">
+      <HintPath>..\..\..\Full Stack Development Training\CODE BOOSTER\CB\Core\DLL\CoreTools.dll</HintPath>
     </Reference>
   </ItemGroup>
 

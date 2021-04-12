@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Reference Include="CoreTools">
-      <HintPath>..\..\..\Full Stack Development (TRAINING)\CODE BOOSTER\App\DLL\CoreTools.dll</HintPath>
+      <HintPath>..\..\..\Full Stack Development Training\CODE BOOSTER\CB\Core\DLL\CoreTools.dll</HintPath>
     </Reference>
   </ItemGroup>
 

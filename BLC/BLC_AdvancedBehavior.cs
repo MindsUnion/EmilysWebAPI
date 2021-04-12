@@ -215,6 +215,26 @@ oList.Add(oTeam_member);
 if (OnPostEvent_General != null){OnPostEvent_General("Get_Team_member_By_OWNER_ID_Adv");}
 return oList;
 }
+public List<Team_member> Get_Team_member_By_EMAIL_Adv(Params_Get_Team_member_By_EMAIL i_Params_Get_Team_member_By_EMAIL)
+{
+List<Team_member> oList = new List<Team_member>();
+Team_member oTeam_member = new Team_member();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_Team_member_By_EMAIL_Adv");}
+#region Body Section.
+List<DALC.Team_member> oList_DBEntries = _AppContext.Get_Team_member_By_EMAIL_Adv(i_Params_Get_Team_member_By_EMAIL.EMAIL);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oTeam_member = new Team_member();
+oTools.CopyPropValues(oDBEntry, oTeam_member);
+oList.Add(oTeam_member);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_Team_member_By_EMAIL_Adv");}
+return oList;
+}
 public List<User> Get_User_By_OWNER_ID_Adv(Params_Get_User_By_OWNER_ID i_Params_Get_User_By_OWNER_ID)
 {
 List<User> oList = new List<User>();
@@ -265,7 +285,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_News_By_Criteria_Adv");}
 if ((i_Params_Get_News_By_Criteria.OWNER_ID == null) || (i_Params_Get_News_By_Criteria.OWNER_ID == 0)) { i_Params_Get_News_By_Criteria.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_News_By_Criteria.START_ROW == null) { i_Params_Get_News_By_Criteria.START_ROW = 0; }
 if ((i_Params_Get_News_By_Criteria.END_ROW == null) || (i_Params_Get_News_By_Criteria.END_ROW == 0)) { i_Params_Get_News_By_Criteria.END_ROW = 1000000; }
-List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Criteria_Adv(i_Params_Get_News_By_Criteria.TITLE,i_Params_Get_News_By_Criteria.DESCRIPTION,i_Params_Get_News_By_Criteria.OWNER_ID,i_Params_Get_News_By_Criteria.START_ROW,i_Params_Get_News_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Criteria_Adv(i_Params_Get_News_By_Criteria.TITLE,i_Params_Get_News_By_Criteria.SUBTITLE,i_Params_Get_News_By_Criteria.DESCRIPTION,i_Params_Get_News_By_Criteria.IMG_NAME,i_Params_Get_News_By_Criteria.NEWS_SOURCE,i_Params_Get_News_By_Criteria.OWNER_ID,i_Params_Get_News_By_Criteria.START_ROW,i_Params_Get_News_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -290,7 +310,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_News_By_Where_Adv");}
 if ((i_Params_Get_News_By_Where.OWNER_ID == null) || (i_Params_Get_News_By_Where.OWNER_ID == 0)) { i_Params_Get_News_By_Where.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_News_By_Where.START_ROW == null) { i_Params_Get_News_By_Where.START_ROW = 0; }
 if ((i_Params_Get_News_By_Where.END_ROW == null) || (i_Params_Get_News_By_Where.END_ROW == 0)) { i_Params_Get_News_By_Where.END_ROW = 1000000; }
-List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Where_Adv(i_Params_Get_News_By_Where.TITLE,i_Params_Get_News_By_Where.DESCRIPTION,i_Params_Get_News_By_Where.OWNER_ID,i_Params_Get_News_By_Where.START_ROW,i_Params_Get_News_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Where_Adv(i_Params_Get_News_By_Where.TITLE,i_Params_Get_News_By_Where.SUBTITLE,i_Params_Get_News_By_Where.DESCRIPTION,i_Params_Get_News_By_Where.IMG_NAME,i_Params_Get_News_By_Where.NEWS_SOURCE,i_Params_Get_News_By_Where.OWNER_ID,i_Params_Get_News_By_Where.START_ROW,i_Params_Get_News_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -315,7 +335,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_Section_By_Criteria_Adv"
 if ((i_Params_Get_Section_By_Criteria.OWNER_ID == null) || (i_Params_Get_Section_By_Criteria.OWNER_ID == 0)) { i_Params_Get_Section_By_Criteria.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_Section_By_Criteria.START_ROW == null) { i_Params_Get_Section_By_Criteria.START_ROW = 0; }
 if ((i_Params_Get_Section_By_Criteria.END_ROW == null) || (i_Params_Get_Section_By_Criteria.END_ROW == 0)) { i_Params_Get_Section_By_Criteria.END_ROW = 1000000; }
-List<DALC.Section> oList_DBEntries = _AppContext.Get_Section_By_Criteria_Adv(i_Params_Get_Section_By_Criteria.SECTION_NAME,i_Params_Get_Section_By_Criteria.OWNER_ID,i_Params_Get_Section_By_Criteria.START_ROW,i_Params_Get_Section_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.Section> oList_DBEntries = _AppContext.Get_Section_By_Criteria_Adv(i_Params_Get_Section_By_Criteria.SECTION_NAME,i_Params_Get_Section_By_Criteria.DESCRIPTION,i_Params_Get_Section_By_Criteria.OWNER_ID,i_Params_Get_Section_By_Criteria.START_ROW,i_Params_Get_Section_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -340,7 +360,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_Section_By_Where_Adv");}
 if ((i_Params_Get_Section_By_Where.OWNER_ID == null) || (i_Params_Get_Section_By_Where.OWNER_ID == 0)) { i_Params_Get_Section_By_Where.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_Section_By_Where.START_ROW == null) { i_Params_Get_Section_By_Where.START_ROW = 0; }
 if ((i_Params_Get_Section_By_Where.END_ROW == null) || (i_Params_Get_Section_By_Where.END_ROW == 0)) { i_Params_Get_Section_By_Where.END_ROW = 1000000; }
-List<DALC.Section> oList_DBEntries = _AppContext.Get_Section_By_Where_Adv(i_Params_Get_Section_By_Where.SECTION_NAME,i_Params_Get_Section_By_Where.OWNER_ID,i_Params_Get_Section_By_Where.START_ROW,i_Params_Get_Section_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.Section> oList_DBEntries = _AppContext.Get_Section_By_Where_Adv(i_Params_Get_Section_By_Where.SECTION_NAME,i_Params_Get_Section_By_Where.DESCRIPTION,i_Params_Get_Section_By_Where.OWNER_ID,i_Params_Get_Section_By_Where.START_ROW,i_Params_Get_Section_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -365,7 +385,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_Team_member_By_Criteria_
 if ((i_Params_Get_Team_member_By_Criteria.OWNER_ID == null) || (i_Params_Get_Team_member_By_Criteria.OWNER_ID == 0)) { i_Params_Get_Team_member_By_Criteria.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_Team_member_By_Criteria.START_ROW == null) { i_Params_Get_Team_member_By_Criteria.START_ROW = 0; }
 if ((i_Params_Get_Team_member_By_Criteria.END_ROW == null) || (i_Params_Get_Team_member_By_Criteria.END_ROW == 0)) { i_Params_Get_Team_member_By_Criteria.END_ROW = 1000000; }
-List<DALC.Team_member> oList_DBEntries = _AppContext.Get_Team_member_By_Criteria_Adv(i_Params_Get_Team_member_By_Criteria.MEMBER_NAME,i_Params_Get_Team_member_By_Criteria.POSITION,i_Params_Get_Team_member_By_Criteria.MAJOR,i_Params_Get_Team_member_By_Criteria.OWNER_ID,i_Params_Get_Team_member_By_Criteria.START_ROW,i_Params_Get_Team_member_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.Team_member> oList_DBEntries = _AppContext.Get_Team_member_By_Criteria_Adv(i_Params_Get_Team_member_By_Criteria.MEMBER_NAME,i_Params_Get_Team_member_By_Criteria.FULLNAME,i_Params_Get_Team_member_By_Criteria.EMAIL,i_Params_Get_Team_member_By_Criteria.PASSWORD,i_Params_Get_Team_member_By_Criteria.POSITION,i_Params_Get_Team_member_By_Criteria.MAJOR,i_Params_Get_Team_member_By_Criteria.DESCRIPTION,i_Params_Get_Team_member_By_Criteria.OWNER_ID,i_Params_Get_Team_member_By_Criteria.START_ROW,i_Params_Get_Team_member_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -390,7 +410,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_Team_member_By_Where_Adv
 if ((i_Params_Get_Team_member_By_Where.OWNER_ID == null) || (i_Params_Get_Team_member_By_Where.OWNER_ID == 0)) { i_Params_Get_Team_member_By_Where.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_Team_member_By_Where.START_ROW == null) { i_Params_Get_Team_member_By_Where.START_ROW = 0; }
 if ((i_Params_Get_Team_member_By_Where.END_ROW == null) || (i_Params_Get_Team_member_By_Where.END_ROW == 0)) { i_Params_Get_Team_member_By_Where.END_ROW = 1000000; }
-List<DALC.Team_member> oList_DBEntries = _AppContext.Get_Team_member_By_Where_Adv(i_Params_Get_Team_member_By_Where.MEMBER_NAME,i_Params_Get_Team_member_By_Where.POSITION,i_Params_Get_Team_member_By_Where.MAJOR,i_Params_Get_Team_member_By_Where.OWNER_ID,i_Params_Get_Team_member_By_Where.START_ROW,i_Params_Get_Team_member_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.Team_member> oList_DBEntries = _AppContext.Get_Team_member_By_Where_Adv(i_Params_Get_Team_member_By_Where.MEMBER_NAME,i_Params_Get_Team_member_By_Where.FULLNAME,i_Params_Get_Team_member_By_Where.EMAIL,i_Params_Get_Team_member_By_Where.PASSWORD,i_Params_Get_Team_member_By_Where.POSITION,i_Params_Get_Team_member_By_Where.MAJOR,i_Params_Get_Team_member_By_Where.DESCRIPTION,i_Params_Get_Team_member_By_Where.OWNER_ID,i_Params_Get_Team_member_By_Where.START_ROW,i_Params_Get_Team_member_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)

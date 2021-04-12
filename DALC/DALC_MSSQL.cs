@@ -310,6 +310,20 @@ oList.Add(o);
 }
 return oList;
 }
+public List<Team_member> Get_Team_member_By_EMAIL ( string EMAIL)
+{
+List<Team_member> oList = new List<Team_member>();
+dynamic p = new ExpandoObject();
+p.EMAIL = EMAIL;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_TEAM_MEMBER_BY_EMAIL", p);
+if (R != null) {foreach (var X in R) {
+Team_member o = new Team_member();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+return oList;
+}
 public List<Uploaded_file> Get_Uploaded_file_By_OWNER_ID ( Int32? OWNER_ID)
 {
 List<Uploaded_file> oList = new List<Uploaded_file>();
@@ -436,6 +450,20 @@ oList.Add(o);
 }
 return oList;
 }
+public List<Team_member> Get_Team_member_By_EMAIL_Adv ( string EMAIL)
+{
+List<Team_member> oList = new List<Team_member>();
+dynamic p = new ExpandoObject();
+p.EMAIL = EMAIL;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_TEAM_MEMBER_BY_EMAIL_ADV", p);
+if (R != null) {foreach (var X in R) {
+Team_member o = new Team_member();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+return oList;
+}
 public List<User> Get_User_By_OWNER_ID_Adv ( Int32? OWNER_ID)
 {
 List<User> oList = new List<User>();
@@ -464,11 +492,11 @@ oList.Add(o);
 }
 return oList;
 }
-public List<News> Get_News_By_Criteria ( string TITLE, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Criteria ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_CRITERIA", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
@@ -479,11 +507,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<News> Get_News_By_Where ( string TITLE, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Where ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_WHERE", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
@@ -554,11 +582,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Section> Get_Section_By_Criteria ( string SECTION_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Section> Get_Section_By_Criteria ( string SECTION_NAME, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Section> oList = new List<Section>();
 dynamic p = new ExpandoObject();
-p.SECTION_NAME = SECTION_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.SECTION_NAME = SECTION_NAME; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_SECTION_BY_CRITERIA", p);
 if (R != null) {foreach (var X in R) {
 Section o = new Section();
@@ -569,11 +597,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Section> Get_Section_By_Where ( string SECTION_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Section> Get_Section_By_Where ( string SECTION_NAME, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Section> oList = new List<Section>();
 dynamic p = new ExpandoObject();
-p.SECTION_NAME = SECTION_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.SECTION_NAME = SECTION_NAME; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_SECTION_BY_WHERE", p);
 if (R != null) {foreach (var X in R) {
 Section o = new Section();
@@ -584,11 +612,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Team_member> Get_Team_member_By_Criteria ( string MEMBER_NAME, string POSITION, string MAJOR, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Team_member> Get_Team_member_By_Criteria ( string MEMBER_NAME, string FULLNAME, string EMAIL, string PASSWORD, string POSITION, string MAJOR, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Team_member> oList = new List<Team_member>();
 dynamic p = new ExpandoObject();
-p.MEMBER_NAME = MEMBER_NAME; p.POSITION = POSITION; p.MAJOR = MAJOR; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.MEMBER_NAME = MEMBER_NAME; p.FULLNAME = FULLNAME; p.EMAIL = EMAIL; p.PASSWORD = PASSWORD; p.POSITION = POSITION; p.MAJOR = MAJOR; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_TEAM_MEMBER_BY_CRITERIA", p);
 if (R != null) {foreach (var X in R) {
 Team_member o = new Team_member();
@@ -599,11 +627,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Team_member> Get_Team_member_By_Where ( string MEMBER_NAME, string POSITION, string MAJOR, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Team_member> Get_Team_member_By_Where ( string MEMBER_NAME, string FULLNAME, string EMAIL, string PASSWORD, string POSITION, string MAJOR, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Team_member> oList = new List<Team_member>();
 dynamic p = new ExpandoObject();
-p.MEMBER_NAME = MEMBER_NAME; p.POSITION = POSITION; p.MAJOR = MAJOR; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.MEMBER_NAME = MEMBER_NAME; p.FULLNAME = FULLNAME; p.EMAIL = EMAIL; p.PASSWORD = PASSWORD; p.POSITION = POSITION; p.MAJOR = MAJOR; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_TEAM_MEMBER_BY_WHERE", p);
 if (R != null) {foreach (var X in R) {
 Team_member o = new Team_member();
@@ -674,11 +702,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<News> Get_News_By_Criteria_Adv ( string TITLE, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Criteria_Adv ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_CRITERIA_ADV", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
@@ -689,11 +717,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<News> Get_News_By_Where_Adv ( string TITLE, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Where_Adv ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_WHERE_ADV", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
@@ -704,11 +732,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Section> Get_Section_By_Criteria_Adv ( string SECTION_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Section> Get_Section_By_Criteria_Adv ( string SECTION_NAME, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Section> oList = new List<Section>();
 dynamic p = new ExpandoObject();
-p.SECTION_NAME = SECTION_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.SECTION_NAME = SECTION_NAME; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_SECTION_BY_CRITERIA_ADV", p);
 if (R != null) {foreach (var X in R) {
 Section o = new Section();
@@ -719,11 +747,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Section> Get_Section_By_Where_Adv ( string SECTION_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Section> Get_Section_By_Where_Adv ( string SECTION_NAME, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Section> oList = new List<Section>();
 dynamic p = new ExpandoObject();
-p.SECTION_NAME = SECTION_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.SECTION_NAME = SECTION_NAME; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_SECTION_BY_WHERE_ADV", p);
 if (R != null) {foreach (var X in R) {
 Section o = new Section();
@@ -734,11 +762,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Team_member> Get_Team_member_By_Criteria_Adv ( string MEMBER_NAME, string POSITION, string MAJOR, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Team_member> Get_Team_member_By_Criteria_Adv ( string MEMBER_NAME, string FULLNAME, string EMAIL, string PASSWORD, string POSITION, string MAJOR, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Team_member> oList = new List<Team_member>();
 dynamic p = new ExpandoObject();
-p.MEMBER_NAME = MEMBER_NAME; p.POSITION = POSITION; p.MAJOR = MAJOR; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.MEMBER_NAME = MEMBER_NAME; p.FULLNAME = FULLNAME; p.EMAIL = EMAIL; p.PASSWORD = PASSWORD; p.POSITION = POSITION; p.MAJOR = MAJOR; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_TEAM_MEMBER_BY_CRITERIA_ADV", p);
 if (R != null) {foreach (var X in R) {
 Team_member o = new Team_member();
@@ -749,11 +777,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<Team_member> Get_Team_member_By_Where_Adv ( string MEMBER_NAME, string POSITION, string MAJOR, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<Team_member> Get_Team_member_By_Where_Adv ( string MEMBER_NAME, string FULLNAME, string EMAIL, string PASSWORD, string POSITION, string MAJOR, string DESCRIPTION, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<Team_member> oList = new List<Team_member>();
 dynamic p = new ExpandoObject();
-p.MEMBER_NAME = MEMBER_NAME; p.POSITION = POSITION; p.MAJOR = MAJOR; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.MEMBER_NAME = MEMBER_NAME; p.FULLNAME = FULLNAME; p.EMAIL = EMAIL; p.PASSWORD = PASSWORD; p.POSITION = POSITION; p.MAJOR = MAJOR; p.DESCRIPTION = DESCRIPTION; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_TEAM_MEMBER_BY_WHERE_ADV", p);
 if (R != null) {foreach (var X in R) {
 Team_member o = new Team_member();
@@ -839,6 +867,11 @@ public void Delete_Team_member_By_OWNER_ID ( Int32? OWNER_ID)
 var p = new { OWNER_ID = OWNER_ID };
 ExecuteDelete("UPG_DELETE_TEAM_MEMBER_BY_OWNER_ID", p);
 }
+public void Delete_Team_member_By_EMAIL ( string EMAIL)
+{
+var p = new { EMAIL = EMAIL };
+ExecuteDelete("UPG_DELETE_TEAM_MEMBER_BY_EMAIL", p);
+}
 public void Delete_Uploaded_file_By_OWNER_ID ( Int32? OWNER_ID)
 {
 var p = new { OWNER_ID = OWNER_ID };
@@ -869,10 +902,10 @@ public void Delete_User_By_USERNAME ( string USERNAME)
 var p = new { USERNAME = USERNAME };
 ExecuteDelete("UPG_DELETE_USER_BY_USERNAME", p);
 }
-public Int32? Edit_News ( Int32? NEWS_ID, string TITLE, string DESCRIPTION, bool? IS_DISPLAYABLE, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
+public Int32? Edit_News ( Int32? NEWS_ID, string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, bool? IS_DISPLAYABLE, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
 {
 News oNews = new News();
-oNews.NEWS_ID = NEWS_ID;oNews.TITLE = TITLE;oNews.DESCRIPTION = DESCRIPTION;oNews.IS_DISPLAYABLE = IS_DISPLAYABLE;oNews.ENTRY_USER_ID = ENTRY_USER_ID;oNews.ENTRY_DATE = ENTRY_DATE;oNews.OWNER_ID = OWNER_ID;
+oNews.NEWS_ID = NEWS_ID;oNews.TITLE = TITLE;oNews.SUBTITLE = SUBTITLE;oNews.DESCRIPTION = DESCRIPTION;oNews.IMG_NAME = IMG_NAME;oNews.NEWS_SOURCE = NEWS_SOURCE;oNews.IS_DISPLAYABLE = IS_DISPLAYABLE;oNews.ENTRY_USER_ID = ENTRY_USER_ID;oNews.ENTRY_DATE = ENTRY_DATE;oNews.OWNER_ID = OWNER_ID;
 ExecuteEdit("UPG_EDIT_NEWS", oNews, "NEWS_ID");
 return oNews.NEWS_ID;
 }
@@ -883,17 +916,17 @@ oOwner.OWNER_ID = OWNER_ID;oOwner.CODE = CODE;oOwner.MAINTENANCE_DUE_DATE = MAIN
 ExecuteEdit("UPG_EDIT_OWNER", oOwner, "OWNER_ID");
 return oOwner.OWNER_ID;
 }
-public Int32? Edit_Section ( Int32? SECTION_ID, string SECTION_NAME, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
+public Int32? Edit_Section ( Int32? SECTION_ID, string SECTION_NAME, string DESCRIPTION, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
 {
 Section oSection = new Section();
-oSection.SECTION_ID = SECTION_ID;oSection.SECTION_NAME = SECTION_NAME;oSection.ENTRY_USER_ID = ENTRY_USER_ID;oSection.ENTRY_DATE = ENTRY_DATE;oSection.OWNER_ID = OWNER_ID;
+oSection.SECTION_ID = SECTION_ID;oSection.SECTION_NAME = SECTION_NAME;oSection.DESCRIPTION = DESCRIPTION;oSection.ENTRY_USER_ID = ENTRY_USER_ID;oSection.ENTRY_DATE = ENTRY_DATE;oSection.OWNER_ID = OWNER_ID;
 ExecuteEdit("UPG_EDIT_SECTION", oSection, "SECTION_ID");
 return oSection.SECTION_ID;
 }
-public Int32? Edit_Team_member ( Int32? TEAM_MEMBER_ID, string MEMBER_NAME, string POSITION, string MAJOR, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
+public Int32? Edit_Team_member ( Int32? TEAM_MEMBER_ID, string MEMBER_NAME, string FULLNAME, string EMAIL, string PASSWORD, string POSITION, string MAJOR, string DESCRIPTION, bool? ADMIN, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
 {
 Team_member oTeam_member = new Team_member();
-oTeam_member.TEAM_MEMBER_ID = TEAM_MEMBER_ID;oTeam_member.MEMBER_NAME = MEMBER_NAME;oTeam_member.POSITION = POSITION;oTeam_member.MAJOR = MAJOR;oTeam_member.ENTRY_USER_ID = ENTRY_USER_ID;oTeam_member.ENTRY_DATE = ENTRY_DATE;oTeam_member.OWNER_ID = OWNER_ID;
+oTeam_member.TEAM_MEMBER_ID = TEAM_MEMBER_ID;oTeam_member.MEMBER_NAME = MEMBER_NAME;oTeam_member.FULLNAME = FULLNAME;oTeam_member.EMAIL = EMAIL;oTeam_member.PASSWORD = PASSWORD;oTeam_member.POSITION = POSITION;oTeam_member.MAJOR = MAJOR;oTeam_member.DESCRIPTION = DESCRIPTION;oTeam_member.ADMIN = ADMIN;oTeam_member.ENTRY_USER_ID = ENTRY_USER_ID;oTeam_member.ENTRY_DATE = ENTRY_DATE;oTeam_member.OWNER_ID = OWNER_ID;
 ExecuteEdit("UPG_EDIT_TEAM_MEMBER", oTeam_member, "TEAM_MEMBER_ID");
 return oTeam_member.TEAM_MEMBER_ID;
 }
@@ -947,6 +980,90 @@ IEnumerable<IDataRecord> R = ExecuteSelectQuery("GET_TBL_SETUP", p);
 if (R != null) {foreach (var X in R) {
 dynamic o = new ExpandoObject();
 o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);o.TBL_NAME = GV<String>(X["TBL_NAME"]);o.CODE_NAME = GV<String>(X["CODE_NAME"]);o.ISSYSTEM = GV<Boolean>(X["ISSYSTEM"]);o.ISDELETEABLE = GV<Boolean>(X["ISDELETEABLE"]);o.ISUPDATEABLE = GV<Boolean>(X["ISUPDATEABLE"]);o.ISDELETED = GV<Boolean>(X["ISDELETED"]);o.ISVISIBLE = GV<Boolean>(X["ISVISIBLE"]);o.DISPLAY_ORDER = GV<Int32>(X["DISPLAY_ORDER"]);o.CODE_VALUE_EN = GV<String>(X["CODE_VALUE_EN"]);o.CODE_VALUE_FR = GV<String>(X["CODE_VALUE_FR"]);o.CODE_VALUE_AR = GV<String>(X["CODE_VALUE_AR"]);o.NOTES = GV<String>(X["NOTES"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_NEWS ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_NEWS", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.NEWS_ID = GV<Int32>(X["NEWS_ID"]);o.TITLE = GV<String>(X["TITLE"]);o.SUBTITLE = GV<String>(X["SUBTITLE"]);o.DESCRIPTION = GV<String>(X["DESCRIPTION"]);o.IMG_NAME = GV<String>(X["IMG_NAME"]);o.IS_DISPLAYABLE = GV<Boolean>(X["IS_DISPLAYABLE"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_OWNER ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_OWNER", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);o.CODE = GV<String>(X["CODE"]);o.MAINTENANCE_DUE_DATE = GV<String>(X["MAINTENANCE_DUE_DATE"]);o.DESCRIPTION = GV<String>(X["DESCRIPTION"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_SECTION ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_SECTION", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.SECTION_ID = GV<Int32>(X["SECTION_ID"]);o.SECTION_NAME = GV<String>(X["SECTION_NAME"]);o.DESCRIPTION = GV<String>(X["DESCRIPTION"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_TEAM_MEMBER ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_TEAM_MEMBER", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.TEAM_MEMBER_ID = GV<Int32>(X["TEAM_MEMBER_ID"]);o.MEMBER_NAME = GV<String>(X["MEMBER_NAME"]);o.FULLNAME = GV<String>(X["FULLNAME"]);o.EMAIL = GV<String>(X["EMAIL"]);o.PASSWORD = GV<String>(X["PASSWORD"]);o.POSITION = GV<String>(X["POSITION"]);o.MAJOR = GV<String>(X["MAJOR"]);o.DESCRIPTION = GV<String>(X["DESCRIPTION"]);o.ADMIN = GV<Boolean>(X["ADMIN"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_UPLOADED_FILE ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_UPLOADED_FILE", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.UPLOADED_FILE_ID = GV<Int64>(X["UPLOADED_FILE_ID"]);o.REL_ENTITY = GV<String>(X["REL_ENTITY"]);o.REL_KEY = GV<Int64>(X["REL_KEY"]);o.REL_FIELD = GV<String>(X["REL_FIELD"]);o.SIZE = GV<Int32>(X["SIZE"]);o.EXTENSION = GV<String>(X["EXTENSION"]);o.STAMP = GV<String>(X["STAMP"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_USER ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_USER", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.USER_ID = GV<Int64>(X["USER_ID"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);o.USERNAME = GV<String>(X["USERNAME"]);o.PASSWORD = GV<String>(X["PASSWORD"]);o.FULLNAME = GV<String>(X["FULLNAME"]);o.USER_TYPE_CODE = GV<String>(X["USER_TYPE_CODE"]);o.IS_ACTIVE = GV<Boolean>(X["IS_ACTIVE"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);
 oList.Add(o);
 }
 }

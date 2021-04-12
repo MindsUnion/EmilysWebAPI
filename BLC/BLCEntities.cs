@@ -144,6 +144,11 @@ public partial class Params_Get_Team_member_By_OWNER_ID
 public Int32? OWNER_ID {get;set;}
 
 }
+public partial class Params_Get_Team_member_By_EMAIL
+{
+public string EMAIL {get;set;}
+
+}
 public partial class Params_Get_Uploaded_file_By_OWNER_ID
 {
 public Int32? OWNER_ID {get;set;}
@@ -182,7 +187,10 @@ public partial class Params_Get_News_By_Criteria
 
 public Int32? OWNER_ID {get;set;}
 public string TITLE {get;set;}
+public string SUBTITLE {get;set;}
 public string DESCRIPTION {get;set;}
+public string IMG_NAME {get;set;}
+public string NEWS_SOURCE {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -192,7 +200,10 @@ public partial class Params_Get_News_By_Where
 
 public Int32? OWNER_ID {get;set;}
 public string TITLE {get;set;}
+public string SUBTITLE {get;set;}
 public string DESCRIPTION {get;set;}
+public string IMG_NAME {get;set;}
+public string NEWS_SOURCE {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -244,6 +255,7 @@ public partial class Params_Get_Section_By_Criteria
 
 public Int32? OWNER_ID {get;set;}
 public string SECTION_NAME {get;set;}
+public string DESCRIPTION {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -253,6 +265,7 @@ public partial class Params_Get_Section_By_Where
 
 public Int32? OWNER_ID {get;set;}
 public string SECTION_NAME {get;set;}
+public string DESCRIPTION {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -262,8 +275,12 @@ public partial class Params_Get_Team_member_By_Criteria
 
 public Int32? OWNER_ID {get;set;}
 public string MEMBER_NAME {get;set;}
+public string FULLNAME {get;set;}
+public string EMAIL {get;set;}
+public string PASSWORD {get;set;}
 public string POSITION {get;set;}
 public string MAJOR {get;set;}
+public string DESCRIPTION {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -273,8 +290,12 @@ public partial class Params_Get_Team_member_By_Where
 
 public Int32? OWNER_ID {get;set;}
 public string MEMBER_NAME {get;set;}
+public string FULLNAME {get;set;}
+public string EMAIL {get;set;}
+public string PASSWORD {get;set;}
 public string POSITION {get;set;}
 public string MAJOR {get;set;}
+public string DESCRIPTION {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -387,6 +408,10 @@ public partial class Params_Delete_Team_member_By_OWNER_ID
 {
 public Int32? OWNER_ID {get;set;}
 }
+public partial class Params_Delete_Team_member_By_EMAIL
+{
+public string EMAIL {get;set;}
+}
 public partial class Params_Delete_Uploaded_file_By_OWNER_ID
 {
 public Int32? OWNER_ID {get;set;}
@@ -418,7 +443,10 @@ public partial class News
 {
 public Int32? NEWS_ID {get;set;}
 public string TITLE {get;set;}
+public string SUBTITLE {get;set;}
 public string DESCRIPTION {get;set;}
+public string IMG_NAME {get;set;}
+public string NEWS_SOURCE {get;set;}
 public bool? IS_DISPLAYABLE {get;set;}
 public long? ENTRY_USER_ID {get;set;}
 public string ENTRY_DATE {get;set;}
@@ -436,6 +464,7 @@ public partial class Section
 {
 public Int32? SECTION_ID {get;set;}
 public string SECTION_NAME {get;set;}
+public string DESCRIPTION {get;set;}
 public long? ENTRY_USER_ID {get;set;}
 public string ENTRY_DATE {get;set;}
 public Int32? OWNER_ID {get;set;}
@@ -444,8 +473,13 @@ public partial class Team_member
 {
 public Int32? TEAM_MEMBER_ID {get;set;}
 public string MEMBER_NAME {get;set;}
+public string FULLNAME {get;set;}
+public string EMAIL {get;set;}
+public string PASSWORD {get;set;}
 public string POSITION {get;set;}
 public string MAJOR {get;set;}
+public string DESCRIPTION {get;set;}
+public bool? ADMIN {get;set;}
 public long? ENTRY_USER_ID {get;set;}
 public string ENTRY_DATE {get;set;}
 public Int32? OWNER_ID {get;set;}

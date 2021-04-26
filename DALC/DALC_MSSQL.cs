@@ -20,6 +20,18 @@ oTools.CopyPropValues_FromDataRecord(R, o);
 }
 return o;
 }
+public News_source Get_News_source_By_NEWS_SOURCE_ID ( Int32? NEWS_SOURCE_ID)
+{
+News_source o = new News_source();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_ID = NEWS_SOURCE_ID;
+IEnumerable<IDataRecord> Q = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_SOURCE_ID", p);
+var R = Q.FirstOrDefault();
+if (R != null){
+oTools.CopyPropValues_FromDataRecord(R, o);
+}
+return o;
+}
 public Owner Get_Owner_By_OWNER_ID ( Int32? OWNER_ID)
 {
 Owner o = new Owner();
@@ -92,6 +104,20 @@ oTools.CopyPropValues_FromDataRecord(R, o);
 }
 return o;
 }
+public News_source Get_News_source_By_NEWS_SOURCE_ID_Adv ( Int32? NEWS_SOURCE_ID)
+{
+News_source o = new News_source();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_ID = NEWS_SOURCE_ID;
+IEnumerable<IDataRecord> Q = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_SOURCE_ID_ADV", p);
+var R = Q.FirstOrDefault();
+if (R != null){
+oTools.CopyPropValues_FromDataRecord(R, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(R["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(R["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(R["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(R["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(R["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(R["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(R["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(R["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(R["T_NEWS_OWNER_ID"]);
+}
+return o;
+}
 public Section Get_Section_By_SECTION_ID_Adv ( Int32? SECTION_ID)
 {
 Section o = new Section();
@@ -136,6 +162,20 @@ p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray());
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_NEWS_ID_LIST", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<News_source> Get_News_source_By_NEWS_SOURCE_ID_List ( List<Int32?> NEWS_SOURCE_ID_LIST)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_ID_LIST = string.Join(",", NEWS_SOURCE_ID_LIST.ToArray());
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_SOURCE_ID_LIST", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
 oTools.CopyPropValues_FromDataRecord(X, o);
 oList.Add(o);
 }
@@ -226,6 +266,22 @@ oList.Add(o);
 }
 return oList;
 }
+public List<News_source> Get_News_source_By_NEWS_SOURCE_ID_List_Adv ( List<Int32?> NEWS_SOURCE_ID_LIST)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_ID_LIST = string.Join(",", NEWS_SOURCE_ID_LIST.ToArray());
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_SOURCE_ID_LIST_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
 public List<Section> Get_Section_By_SECTION_ID_List_Adv ( List<Int32?> SECTION_ID_LIST)
 {
 List<Section> oList = new List<Section>();
@@ -276,6 +332,34 @@ p.OWNER_ID = OWNER_ID;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_OWNER_ID", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<News_source> Get_News_source_By_OWNER_ID ( Int32? OWNER_ID)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.OWNER_ID = OWNER_ID;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_OWNER_ID", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<News_source> Get_News_source_By_NEWS_ID ( Int32? NEWS_ID)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_ID = NEWS_ID;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_ID", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
 oTools.CopyPropValues_FromDataRecord(X, o);
 oList.Add(o);
 }
@@ -422,6 +506,38 @@ oList.Add(o);
 }
 return oList;
 }
+public List<News_source> Get_News_source_By_OWNER_ID_Adv ( Int32? OWNER_ID)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.OWNER_ID = OWNER_ID;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_OWNER_ID_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<News_source> Get_News_source_By_NEWS_ID_Adv ( Int32? NEWS_ID)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_ID = NEWS_ID;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_ID_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
 public List<Section> Get_Section_By_OWNER_ID_Adv ( Int32? OWNER_ID)
 {
 List<Section> oList = new List<Section>();
@@ -492,11 +608,41 @@ oList.Add(o);
 }
 return oList;
 }
-public List<News> Get_News_By_Criteria ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News_source> Get_News_source_By_NEWS_ID_List ( List<Int32?> NEWS_ID_LIST)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray());
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_ID_LIST", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<News_source> Get_News_source_By_NEWS_ID_List_Adv ( List<Int32?> NEWS_ID_LIST)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray());
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_NEWS_ID_LIST_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<News> Get_News_By_Criteria ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_CRITERIA", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
@@ -507,14 +653,44 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<News> Get_News_By_Where ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Where ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_WHERE", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Criteria ( string NEWS_SOURCE_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_CRITERIA", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Where ( string NEWS_SOURCE_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_WHERE", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
 oTools.CopyPropValues_FromDataRecord(X, o);
 oList.Add(o);
 }
@@ -702,11 +878,11 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<News> Get_News_By_Criteria_Adv ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Criteria_Adv ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_CRITERIA_ADV", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
@@ -717,15 +893,49 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
-public List<News> Get_News_By_Where_Adv ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+public List<News> Get_News_By_Where_Adv ( string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
 {
 List<News> oList = new List<News>();
 dynamic p = new ExpandoObject();
-p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.NEWS_SOURCE = NEWS_SOURCE; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+p.TITLE = TITLE; p.SUBTITLE = SUBTITLE; p.DESCRIPTION = DESCRIPTION; p.IMG_NAME = IMG_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
 IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_BY_WHERE_ADV", p);
 if (R != null) {foreach (var X in R) {
 News o = new News();
 oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Criteria_Adv ( string NEWS_SOURCE_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_CRITERIA_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Where_Adv ( string NEWS_SOURCE_NAME, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_WHERE_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
 oList.Add(o);
 }
 }
@@ -822,10 +1032,79 @@ oList.Add(o);
 TOTAL_COUNT = p.TOTAL_COUNT;
 return oList;
 }
+public List<News_source> Get_News_source_By_Criteria_InList ( string NEWS_SOURCE_NAME, List<Int32?> NEWS_ID_LIST, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray()); p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_CRITERIA_IN_LIST", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Where_InList ( string NEWS_SOURCE_NAME, List<Int32?> NEWS_ID_LIST, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray()); p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_WHERE_IN_LIST", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Criteria_InList_Adv ( string NEWS_SOURCE_NAME, List<Int32?> NEWS_ID_LIST, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray()); p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_CRITERIA_IN_LIST_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
+public List<News_source> Get_News_source_By_Where_InList_Adv ( string NEWS_SOURCE_NAME, List<Int32?> NEWS_ID_LIST, Int32? OWNER_ID, Int64? START_ROW, Int64? END_ROW,ref  Int64? TOTAL_COUNT)
+{
+List<News_source> oList = new List<News_source>();
+dynamic p = new ExpandoObject();
+p.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME; p.NEWS_ID_LIST = string.Join(",", NEWS_ID_LIST.ToArray()); p.OWNER_ID = OWNER_ID; p.START_ROW = START_ROW; p.END_ROW = END_ROW; p.TOTAL_COUNT = TOTAL_COUNT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UPG_GET_NEWS_SOURCE_BY_WHERE_IN_LIST_ADV", p);
+if (R != null) {foreach (var X in R) {
+News_source o = new News_source();
+oTools.CopyPropValues_FromDataRecord(X, o);
+o.My_News = new News();
+o.My_News.NEWS_ID = GV<Int32>(X["T_NEWS_NEWS_ID"]);o.My_News.TITLE = GV<String>(X["T_NEWS_TITLE"]);o.My_News.SUBTITLE = GV<String>(X["T_NEWS_SUBTITLE"]);o.My_News.DESCRIPTION = GV<String>(X["T_NEWS_DESCRIPTION"]);o.My_News.IMG_NAME = GV<String>(X["T_NEWS_IMG_NAME"]);o.My_News.IS_DISPLAYABLE = GV<Boolean>(X["T_NEWS_IS_DISPLAYABLE"]);o.My_News.ENTRY_USER_ID = GV<Int64>(X["T_NEWS_ENTRY_USER_ID"]);o.My_News.ENTRY_DATE = GV<String>(X["T_NEWS_ENTRY_DATE"]);o.My_News.OWNER_ID = GV<Int32>(X["T_NEWS_OWNER_ID"]);
+oList.Add(o);
+}
+}
+TOTAL_COUNT = p.TOTAL_COUNT;
+return oList;
+}
 public void Delete_News ( Int32? NEWS_ID)
 {
 var p = new { NEWS_ID = NEWS_ID };
 ExecuteDelete("UPG_DELETE_NEWS", p);
+}
+public void Delete_News_source ( Int32? NEWS_SOURCE_ID)
+{
+var p = new { NEWS_SOURCE_ID = NEWS_SOURCE_ID };
+ExecuteDelete("UPG_DELETE_NEWS_SOURCE", p);
 }
 public void Delete_Owner ( Int32? OWNER_ID)
 {
@@ -856,6 +1135,16 @@ public void Delete_News_By_OWNER_ID ( Int32? OWNER_ID)
 {
 var p = new { OWNER_ID = OWNER_ID };
 ExecuteDelete("UPG_DELETE_NEWS_BY_OWNER_ID", p);
+}
+public void Delete_News_source_By_OWNER_ID ( Int32? OWNER_ID)
+{
+var p = new { OWNER_ID = OWNER_ID };
+ExecuteDelete("UPG_DELETE_NEWS_SOURCE_BY_OWNER_ID", p);
+}
+public void Delete_News_source_By_NEWS_ID ( Int32? NEWS_ID)
+{
+var p = new { NEWS_ID = NEWS_ID };
+ExecuteDelete("UPG_DELETE_NEWS_SOURCE_BY_NEWS_ID", p);
 }
 public void Delete_Section_By_OWNER_ID ( Int32? OWNER_ID)
 {
@@ -902,12 +1191,19 @@ public void Delete_User_By_USERNAME ( string USERNAME)
 var p = new { USERNAME = USERNAME };
 ExecuteDelete("UPG_DELETE_USER_BY_USERNAME", p);
 }
-public Int32? Edit_News ( Int32? NEWS_ID, string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, string NEWS_SOURCE, bool? IS_DISPLAYABLE, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
+public Int32? Edit_News ( Int32? NEWS_ID, string TITLE, string SUBTITLE, string DESCRIPTION, string IMG_NAME, bool? IS_DISPLAYABLE, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
 {
 News oNews = new News();
-oNews.NEWS_ID = NEWS_ID;oNews.TITLE = TITLE;oNews.SUBTITLE = SUBTITLE;oNews.DESCRIPTION = DESCRIPTION;oNews.IMG_NAME = IMG_NAME;oNews.NEWS_SOURCE = NEWS_SOURCE;oNews.IS_DISPLAYABLE = IS_DISPLAYABLE;oNews.ENTRY_USER_ID = ENTRY_USER_ID;oNews.ENTRY_DATE = ENTRY_DATE;oNews.OWNER_ID = OWNER_ID;
+oNews.NEWS_ID = NEWS_ID;oNews.TITLE = TITLE;oNews.SUBTITLE = SUBTITLE;oNews.DESCRIPTION = DESCRIPTION;oNews.IMG_NAME = IMG_NAME;oNews.IS_DISPLAYABLE = IS_DISPLAYABLE;oNews.ENTRY_USER_ID = ENTRY_USER_ID;oNews.ENTRY_DATE = ENTRY_DATE;oNews.OWNER_ID = OWNER_ID;
 ExecuteEdit("UPG_EDIT_NEWS", oNews, "NEWS_ID");
 return oNews.NEWS_ID;
+}
+public Int32? Edit_News_source ( Int32? NEWS_SOURCE_ID, string NEWS_SOURCE_NAME, Int32? NEWS_ID, long? ENTRY_USER_ID, string ENTRY_DATE, Int32? OWNER_ID)
+{
+News_source oNews_source = new News_source();
+oNews_source.NEWS_SOURCE_ID = NEWS_SOURCE_ID;oNews_source.NEWS_SOURCE_NAME = NEWS_SOURCE_NAME;oNews_source.NEWS_ID = NEWS_ID;oNews_source.ENTRY_USER_ID = ENTRY_USER_ID;oNews_source.ENTRY_DATE = ENTRY_DATE;oNews_source.OWNER_ID = OWNER_ID;
+ExecuteEdit("UPG_EDIT_NEWS_SOURCE", oNews_source, "NEWS_SOURCE_ID");
+return oNews_source.NEWS_SOURCE_ID;
 }
 public Int32? Edit_Owner ( Int32? OWNER_ID, string CODE, string MAINTENANCE_DUE_DATE, string DESCRIPTION, string ENTRY_DATE)
 {
@@ -994,6 +1290,20 @@ IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_NEWS", p);
 if (R != null) {foreach (var X in R) {
 dynamic o = new ExpandoObject();
 o.NEWS_ID = GV<Int32>(X["NEWS_ID"]);o.TITLE = GV<String>(X["TITLE"]);o.SUBTITLE = GV<String>(X["SUBTITLE"]);o.DESCRIPTION = GV<String>(X["DESCRIPTION"]);o.IMG_NAME = GV<String>(X["IMG_NAME"]);o.IS_DISPLAYABLE = GV<Boolean>(X["IS_DISPLAYABLE"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);
+oList.Add(o);
+}
+}
+return oList;
+}
+public List<dynamic> UP_BULK_UPSERT_NEWS_SOURCE ( string JSON_CONTENT)
+{
+List<dynamic> oList = new List<dynamic>();
+dynamic p = new ExpandoObject();
+p.JSON_CONTENT = JSON_CONTENT;
+IEnumerable<IDataRecord> R = ExecuteSelectQuery("UP_BULK_UPSERT_NEWS_SOURCE", p);
+if (R != null) {foreach (var X in R) {
+dynamic o = new ExpandoObject();
+o.NEWS_SOURCE_ID = GV<Int32>(X["NEWS_SOURCE_ID"]);o.NEWS_SOURCE_NAME = GV<String>(X["NEWS_SOURCE_NAME"]);o.NEWS_ID = GV<Int32>(X["NEWS_ID"]);o.ENTRY_USER_ID = GV<Int64>(X["ENTRY_USER_ID"]);o.ENTRY_DATE = GV<String>(X["ENTRY_DATE"]);o.OWNER_ID = GV<Int32>(X["OWNER_ID"]);
 oList.Add(o);
 }
 }

@@ -5,7 +5,6 @@ D:\Emilys Association Website\App\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csproj.C
 D:\Emilys Association Website\App\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\appsettings.json
-D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\WebAPI.exe
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\EnyimMemcachedCore.dll
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
@@ -67,3 +66,4 @@ D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\CoreCrypto.dll
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\MailKit.dll
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\MimeKit.dll
 D:\Emilys Association Website\App\WebAPI\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\Emilys Association Website\App\WebAPI\obj\Debug\netcoreapp3.1\scopedcss\bundle\WebAPI.styles.css

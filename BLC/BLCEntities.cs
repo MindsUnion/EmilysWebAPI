@@ -30,6 +30,15 @@ public Int32? NEWS_ID {get;set;}
 #endregion
 }
 #endregion
+#region Params_Get_News_source_By_NEWS_SOURCE_ID
+public partial class Params_Get_News_source_By_NEWS_SOURCE_ID
+{
+#region Properties
+public Int32? NEWS_SOURCE_ID {get;set;}
+
+#endregion
+}
+#endregion
 #region Params_Get_Owner_By_OWNER_ID
 public partial class Params_Get_Owner_By_OWNER_ID
 {
@@ -84,6 +93,15 @@ public partial class Params_Get_News_By_NEWS_ID_List_SP
 public string NEWS_ID_LIST {get;set;}
 
 }
+public partial class Params_Get_News_source_By_NEWS_SOURCE_ID_List
+{
+public List<Int32?> NEWS_SOURCE_ID_LIST {get;set;}
+}
+public partial class Params_Get_News_source_By_NEWS_SOURCE_ID_List_SP
+{
+public string NEWS_SOURCE_ID_LIST {get;set;}
+
+}
 public partial class Params_Get_Owner_By_OWNER_ID_List
 {
 public List<Int32?> OWNER_ID_LIST {get;set;}
@@ -134,6 +152,16 @@ public partial class Params_Get_News_By_OWNER_ID
 public Int32? OWNER_ID {get;set;}
 
 }
+public partial class Params_Get_News_source_By_OWNER_ID
+{
+public Int32? OWNER_ID {get;set;}
+
+}
+public partial class Params_Get_News_source_By_NEWS_ID
+{
+public Int32? NEWS_ID {get;set;}
+
+}
 public partial class Params_Get_Section_By_OWNER_ID
 {
 public Int32? OWNER_ID {get;set;}
@@ -182,6 +210,11 @@ public partial class Params_Get_User_By_USERNAME
 public string USERNAME {get;set;}
 
 }
+public partial class Params_Get_News_source_By_NEWS_ID_List
+{
+public List<Int32?> NEWS_ID_LIST {get;set;}
+
+}
 public partial class Params_Get_News_By_Criteria
 {
 
@@ -190,7 +223,6 @@ public string TITLE {get;set;}
 public string SUBTITLE {get;set;}
 public string DESCRIPTION {get;set;}
 public string IMG_NAME {get;set;}
-public string NEWS_SOURCE {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -203,7 +235,24 @@ public string TITLE {get;set;}
 public string SUBTITLE {get;set;}
 public string DESCRIPTION {get;set;}
 public string IMG_NAME {get;set;}
-public string NEWS_SOURCE {get;set;}
+public long? START_ROW {get;set;}
+public long? END_ROW {get;set;}
+public long? TOTAL_COUNT {get;set;}
+}
+public partial class Params_Get_News_source_By_Criteria
+{
+
+public Int32? OWNER_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
+public long? START_ROW {get;set;}
+public long? END_ROW {get;set;}
+public long? TOTAL_COUNT {get;set;}
+}
+public partial class Params_Get_News_source_By_Where
+{
+
+public Int32? OWNER_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
 public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
@@ -348,11 +397,57 @@ public long? START_ROW {get;set;}
 public long? END_ROW {get;set;}
 public long? TOTAL_COUNT {get;set;}
 }
+public partial class Params_Get_News_source_By_Criteria_InList
+{
+
+public Int32? OWNER_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
+public List<Int32?> NEWS_ID_LIST {get;set;}
+public long? START_ROW {get;set;}
+public long? END_ROW {get;set;}
+public long? TOTAL_COUNT {get;set;}
+}
+public partial class Params_Get_News_source_By_Criteria_InList_SP
+{
+public Int32? OWNER_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
+public string NEWS_ID_LIST {get;set;}
+public long? START_ROW {get;set;}
+public long? END_ROW {get;set;}
+public long? TOTAL_COUNT {get;set;}
+}
+public partial class Params_Get_News_source_By_Where_InList
+{
+
+public Int32? OWNER_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
+public List<Int32?> NEWS_ID_LIST {get;set;}
+public long? START_ROW {get;set;}
+public long? END_ROW {get;set;}
+public long? TOTAL_COUNT {get;set;}
+}
+public partial class Params_Get_News_source_By_Where_InList_SP
+{
+public Int32? OWNER_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
+public string NEWS_ID_LIST {get;set;}
+public long? START_ROW {get;set;}
+public long? END_ROW {get;set;}
+public long? TOTAL_COUNT {get;set;}
+}
 #region Params_Delete_News
 public partial class Params_Delete_News
 {
 #region Properties
 public Int32? NEWS_ID {get;set;}
+#endregion
+}
+#endregion
+#region Params_Delete_News_source
+public partial class Params_Delete_News_source
+{
+#region Properties
+public Int32? NEWS_SOURCE_ID {get;set;}
 #endregion
 }
 #endregion
@@ -400,6 +495,14 @@ public partial class Params_Delete_News_By_OWNER_ID
 {
 public Int32? OWNER_ID {get;set;}
 }
+public partial class Params_Delete_News_source_By_OWNER_ID
+{
+public Int32? OWNER_ID {get;set;}
+}
+public partial class Params_Delete_News_source_By_NEWS_ID
+{
+public Int32? NEWS_ID {get;set;}
+}
 public partial class Params_Delete_Section_By_OWNER_ID
 {
 public Int32? OWNER_ID {get;set;}
@@ -446,8 +549,16 @@ public string TITLE {get;set;}
 public string SUBTITLE {get;set;}
 public string DESCRIPTION {get;set;}
 public string IMG_NAME {get;set;}
-public string NEWS_SOURCE {get;set;}
 public bool? IS_DISPLAYABLE {get;set;}
+public long? ENTRY_USER_ID {get;set;}
+public string ENTRY_DATE {get;set;}
+public Int32? OWNER_ID {get;set;}
+}
+public partial class News_source
+{
+public Int32? NEWS_SOURCE_ID {get;set;}
+public string NEWS_SOURCE_NAME {get;set;}
+public Int32? NEWS_ID {get;set;}
 public long? ENTRY_USER_ID {get;set;}
 public string ENTRY_DATE {get;set;}
 public Int32? OWNER_ID {get;set;}
@@ -514,6 +625,15 @@ public partial class Params_Edit_News_List
 #region Properties
 public List<News> My_List_To_Edit { get; set; }
 public List<News> My_List_To_Delete { get; set; }
+#endregion
+}
+#endregion
+#region Params_Edit_News_source_List
+public partial class Params_Edit_News_source_List
+{
+#region Properties
+public List<News_source> My_List_To_Edit { get; set; }
+public List<News_source> My_List_To_Delete { get; set; }
 #endregion
 }
 #endregion

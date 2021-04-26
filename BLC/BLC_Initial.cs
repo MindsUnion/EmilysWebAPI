@@ -110,11 +110,45 @@ namespace BLC
            this.OnPreEvent_Edit_Team_member += BLC_OnPreEvent_Edit_Team_member;
             this.OnPostEvent_Edit_Section += BLC_OnPostEvent_Edit_Section;
             this.OnPostEvent_Get_Team_member_By_EMAIL += BLC_OnPostEvent_Get_Team_member_By_EMAIL;
+            this.OnPostEvent_Get_News_By_Where += BLC_OnPostEvent_Get_News_By_Where;
             Register_Uploaded_Events_Handlers();
             #endregion
         }
 
-       
+        private void BLC_OnPostEvent_Get_News_By_Where(ref List<News> i_Result, Params_Get_News_By_Where i_Params_Get_News_By_Where)
+        {
+            Params_Get_News_source_By_NEWS_ID newsSource = new Params_Get_News_source_By_NEWS_ID();
+            foreach (var item in i_Result)
+            {
+                newsSource.NEWS_ID = item.NEWS_ID;
+                List<News_source> sources = new List<News_source>();
+                sources = Get_News_source_By_NEWS_ID(newsSource);
+                item.sources = sources;
+            }
+
+            Uploaded_file oUploaded_file = new Uploaded_file();
+            List<Uploaded_file> oList_Uploaded_files = new List<Uploaded_file>();
+            Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY newsImages = new Params_Get_Uploaded_file_By_REL_ENTITY_REL_KEY();
+            newsImages.REL_ENTITY = "[TBL_NEWS]";
+
+            string str_WEB_PATH = ConfigurationManager.AppSettings["WEB_PATH"].ToString();
+            foreach (var item in i_Result)
+            {
+                newsImages.REL_KEY = item.NEWS_ID;
+                if (i_Result != null)
+                {
+
+                    item.My_Uploaded_files = Get_Uploaded_file_By_REL_ENTITY_REL_KEY(newsImages);
+                    if (item.My_Uploaded_files != null)
+                    {
+                        foreach (var oRow_Uploaded_file in item.My_Uploaded_files)
+                        {
+                            oRow_Uploaded_file.My_URL = string.Format("{0}/Files/Uploaded/{1}.{2}", str_WEB_PATH, oRow_Uploaded_file.UPLOADED_FILE_ID.ToString(), oRow_Uploaded_file.EXTENSION);
+                        }
+                    }
+                }
+            }
+        }
 
         private void BLC_OnPostEvent_Edit_Section(Section i_Section, Enum_EditMode i_Enum_EditMode)
         {
@@ -131,9 +165,11 @@ namespace BLC
 
 
             User oUser = new User();
+            oUser.OWNER_ID = 1;
             MiniCryptoHelper oCrypto = new MiniCryptoHelper();
             switch (i_Enum_EditMode)
             {
+
                 case Enum_EditMode.Add:
                     var oQuery = _AppContext.Get_Team_member_By_EMAIL(i_Team_member.EMAIL);
                     if (oQuery.Count == 1)
@@ -142,26 +178,62 @@ namespace BLC
                     }
                     else
                     {
-                        oUser.USER_ID = -1;
-                        oUser.OWNER_ID = 1;
-                        oUser.FULLNAME = i_Team_member.MEMBER_NAME;
-                        oUser.USERNAME = i_Team_member.EMAIL;
-                        i_Team_member.PASSWORD = oCrypto.Encrypt(i_Team_member.PASSWORD);
-                        oUser.PASSWORD = i_Team_member.PASSWORD;
-                        oUser.USER_TYPE_CODE = "001";
-                        oUser.IS_ACTIVE = false;
-                        Edit_User(oUser);
+                        if (i_Team_member.EMAIL != null || i_Team_member.PASSWORD != null)
+                        {
+                            oUser.USER_ID = -1;
+                            oUser.FULLNAME = i_Team_member.MEMBER_NAME;
+                            oUser.USERNAME = i_Team_member.EMAIL;
+                            i_Team_member.PASSWORD = oCrypto.Encrypt(i_Team_member.PASSWORD);
+                            oUser.PASSWORD = i_Team_member.PASSWORD;
+                            oUser.USER_TYPE_CODE = "001";
+                            oUser.IS_ACTIVE = false;
+                            Edit_User(oUser);
 
-                        Params_Verify_Account oParams = new Params_Verify_Account();
-                        oParams.User_ID = oUser.USER_ID;
-                        oParams.UserName = oUser.USERNAME;
+                            Params_Verify_Account oParams = new Params_Verify_Account();
+                            oParams.User_ID = oUser.USER_ID;
+                            oParams.UserName = oUser.USERNAME;
 
-                        Verify_Account(oParams);
+                            Verify_Account(oParams);
+                        }
                     }
                     break;
 
                 case Enum_EditMode.Update:
+                    Params_Get_Team_member_By_TEAM_MEMBER_ID teamMemberId = new Params_Get_Team_member_By_TEAM_MEMBER_ID();
+                    teamMemberId.TEAM_MEMBER_ID = i_Team_member.TEAM_MEMBER_ID;
+                    var oldTeamMember = Get_Team_member_By_TEAM_MEMBER_ID(teamMemberId);
+                    Params_Get_User_By_USERNAME member = new Params_Get_User_By_USERNAME();
+                    member.USERNAME = oldTeamMember.EMAIL;
+                    var teamMember = Get_User_By_USERNAME(member);
+                    oUser.USER_ID = teamMember[0].USER_ID;
+                    oUser.USER_TYPE_CODE = "001";
+                    oUser.FULLNAME = i_Team_member.MEMBER_NAME;
+                    if (teamMember[0].USERNAME != i_Team_member.EMAIL)
+                    {
+                        oUser.IS_ACTIVE = false;
+                        oUser.USERNAME = i_Team_member.EMAIL;
+                        Params_Verify_Account verifyAcc = new Params_Verify_Account();
+                        verifyAcc.User_ID = teamMember[0].USER_ID;
+                        verifyAcc.UserName = i_Team_member.EMAIL;
+                        Verify_Account(verifyAcc);
+                    }
+                    else
+                    {
+                        oUser.IS_ACTIVE = true;
+                        oUser.USERNAME = i_Team_member.EMAIL;
 
+                    }
+
+                    if (teamMember[0].PASSWORD == i_Team_member.PASSWORD)
+                    {
+                        oUser.PASSWORD = i_Team_member.PASSWORD;
+                    }
+                    else
+                    {
+                        i_Team_member.PASSWORD = oCrypto.Encrypt(i_Team_member.PASSWORD);
+                        oUser.PASSWORD = i_Team_member.PASSWORD;
+                    }
+                    Edit_User(oUser);
                     break;
             }
         }

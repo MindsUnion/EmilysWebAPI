@@ -240,8 +240,6 @@ namespace BLC
         }
         #endregion
 
-
-
         #region Section with file.
         public List<Section> Get_Section_With_Uploaded_Files (Params_Get_Section_With_Uploaded_Files i_Params_Get_Section_With_Uploaded_Files)
         {
@@ -281,22 +279,15 @@ namespace BLC
 
         #region Email Verification
 
-        public User Verify_Account(Params_Verify_Account i_Params_Verify_Account)
+        public void Verify_Account(Params_Verify_Account i_Params_Verify_Account)
         {
-            User oUser = new User();
-            Crypto.MiniCryptoHelper oCrypto = new Crypto.MiniCryptoHelper();
-            var oQuery = _AppContext.Get_User_By_USERNAME(i_Params_Verify_Account.UserName);
-
-            if ((oQuery != null) && (oQuery.Count > 0))
+            if ((i_Params_Verify_Account.UserName != null) && (i_Params_Verify_Account.UserName.Length > 0))
             {
-                oUser.USER_ID = oQuery[0].USER_ID;
-                oUser.USERNAME = oQuery[0].USERNAME;
-                oUser.OWNER_ID = oQuery[0].OWNER_ID;
-
+               
                 var msg = new MimeMessage();
-                msg.From.Add(new MailboxAddress("Amar", "amar27.z.az@gmail.com"));
+                msg.From.Add(new MailboxAddress("Association Emilys", "emilysassociation@gmail.com"));
 
-                msg.To.Add(new MailboxAddress("User", oUser.USERNAME));
+                msg.To.Add(new MailboxAddress("User", i_Params_Verify_Account.UserName));
                 msg.Subject = "Email Verification";
                 msg.Body = new TextPart("plain")
                 {
@@ -306,15 +297,13 @@ namespace BLC
                 using (var client = new MailKit.Net.Smtp.SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("amar27.z.az@gmail.com", "1872019MA");
+                    client.Authenticate("emilysassociation@gmail.com", "Mimi1706");
                     client.Send(msg);
                     client.Disconnect(true);
                 }
 
 
             }
-            return oUser;
-
         }
 
         #endregion
@@ -431,87 +420,73 @@ namespace BLC
         #endregion
 
         #region Contact Us Form
-        public List<object> Contact_Us(Params_Contact_Us i_Params_Contact_Us)
+        public void ContactUsForm(Params_ContactUsForm i_Params_ContactUsForm)
         {
-
-            List<object> ol = new List<object>();
-            var fName = i_Params_Contact_Us.FirstName;
-            var Lname = i_Params_Contact_Us.LastName;
-            var userEmail = i_Params_Contact_Us.email;
-            var formType = i_Params_Contact_Us.HelpOrExp;
-            var messageUser = i_Params_Contact_Us.msgUser;
-            ol.Add(fName);
-            ol.Add(Lname);
-            ol.Add(userEmail);
-            ol.Add(formType);
-            ol.Add(messageUser);
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Association Emilys", "contact@association-emilys.com"));
+            message.From.Add(new MailboxAddress("Association Emilys", "emilysassociation@gmail.com"));
             message.To.Add(new MailboxAddress("Emilys", "associationemilys@gmail.com"));
             message.Subject = "Contactez-nous Formulaire";
             message.Body = new TextPart("plain")
             {
-                Text = String.Format("Nouveau message pour aujourd'hui!\nPrénom: {0}\nNom: {1}\nEmail: {2}\nDemandez-vous de l'aide ou dites-nous votre expérience? {3}\nMessage: {4}", fName, Lname, userEmail, formType, messageUser)
+                Text = String.Format("Nouveau message pour aujourd'hui!\nPrénom: {0}\nNom: {1}\nEmail: {2}\nDemandez-vous de l'aide ou dites-nous votre expérience? {3}\nMessage: {4}", i_Params_ContactUsForm.FirstName, i_Params_ContactUsForm.LastName, i_Params_ContactUsForm.email, i_Params_ContactUsForm.type, i_Params_ContactUsForm.msgUser)
             };
 
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp.ionos.fr", 465, true);
-                client.Authenticate("contact@association-emilys.com", "Ass29!04");
+                client.Connect("smtp.gmail.com", 465, true);
+                client.Authenticate("emilysassociation@gmail.com", "Mimi1706");
                 client.Send(message);
                 client.Disconnect(true);
             }
-
-            return ol;
         }
         #endregion
 
         #region Members Form
-        //public List<object> MemberD(DataDetails form)
-        //{
-        //    //DataDetails form = new DataDetails();
-        //    List<object> ol = new List<object>();
-        //    var firstName = form.FirstName;
-        //    var lastName = form.LastName;
-        //    var address = form.Address;
-        //    var postalCode = form.postalCode;
-        //    var city = form.city;
-        //    var type = form.type;
-        //    var email = form.email;
-        //    ol.Add(firstName);
-        //    ol.Add(lastName);
-        //    ol.Add(address);
-        //    ol.Add(postalCode);
-        //    ol.Add(city);
-        //    ol.Add(type);
-        //    ol.Add(email);
-        //    var message = new MimeMessage();
-        //    message.From.Add(new MailboxAddress("Association Emilys", "contact@association-emilys.com"));
+        public void MembershipForm(Params_MemershipForm i_Params_MemershipForm)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Association Emilys", "emilysassociation@gmail.com"));
+            message.To.Add(new MailboxAddress("Emilys", "associationemilys@gmail.com"));
+            message.Subject = "Formulaire d'adhésion";
+            message.Body = new TextPart("Plain")
 
-        //    message.To.Add(new MailboxAddress("Emilys", "associationemilys@gmail.com"));
-        //    message.Subject = "Formulaire d'adhésion";
-        //    message.Body = new TextPart("Plain")
-
-        //    {
-        //        Text = String.Format("Nouveau membre pour aujourd'hui!\n Prénom: {0}\nNom: {1}\nAdresse: {2}\nCode postal: {3}\n Ville: {4}\n Type de membre: {5}\n E-mail: {6} ", firstName, lastName, address, postalCode, city, type, email)
-        //    };
-
-        //    using (var client = new SmtpClient())
-        //    {
-        //        client.Connect("smtp.gmail.com", 587, false);
-        //        client.Authenticate("contact@association-emilys.com", "Ass29!04");
-        //        client.Send(message);
-        //        client.Disconnect(true);
-        //    }
-
-        //    Console.WriteLine("Done");
-        //    return ol;
-        //}
+            {
+                Text = String.Format("Nouveau membre pour aujourd'hui!\n Prénom: {0}\nNom: {1}\nAdresse: {2}\nCode postal: {3}\n Ville: {4}\n Type de membre: {5}\n E-mail: {6} ", i_Params_MemershipForm.FirstName, i_Params_MemershipForm.LastName, i_Params_MemershipForm.Address, i_Params_MemershipForm.PostalCode, i_Params_MemershipForm.City, i_Params_MemershipForm.Type, i_Params_MemershipForm.Email)
+            };
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("emilysassociation@gmail.com", "Mimi1706");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
 
         #endregion
 
         #region Donators Form
+        public void DonationForm(Params_DonationForm i_Params_DonationForm)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Association Emilys", "emilysassociation@gmail.com"));
 
+            message.To.Add(new MailboxAddress("Emilys", "associationemilys@gmail.com"));
+            message.Subject = "Formulaire de don";
+            message.Body = new TextPart("Plain")
+
+            {
+
+                Text = String.Format("Nouveau don! \nVoici les informations du donateur:\nPrénom: {0}\nNom: {1}\nAdresse: {2}\nCode postal: {3}\nVille: {4}\nMontant Pour payer: {5} Euro\nEmail :{6}", i_Params_DonationForm.FirstName, i_Params_DonationForm.LastName, i_Params_DonationForm.Address, i_Params_DonationForm.postalCode, i_Params_DonationForm.city, i_Params_DonationForm.amount, i_Params_DonationForm.email)
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587, false);
+                client.Authenticate("emilysassociation@gmail.com", "Mimi1706");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
         #endregion
 
     }
@@ -552,6 +527,7 @@ namespace BLC
     {
         public List<Uploaded_file> My_Uploaded_files { get; set; }
     }
+
 
     public partial class Section
     {
@@ -603,10 +579,8 @@ namespace BLC
         public string USERNAME { get; set; }
     }
 
-    public class Params_Contact_Us
+    public class Params_ContactUsForm
     {
-        public string HelpOrExp { get; set; }
-        public string OnOff { get; set; }
         public string msgUser { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -614,8 +588,38 @@ namespace BLC
         public int postalCode { get; set; }
         public string city { get; set; }
         public string type { get; set; }
+        public string email { get; set; }
+    }
+   public class Params_MemershipForm
+    {
+        public string FirstName{ get; set; }
+        public string LastName{ get; set; }
+        public string Address{ get; set; }
+        public int PostalCode{ get; set; }
+        public string Email{ get; set; }
+        public string City{ get; set; }
+        public string Type{ get; set; }
+
+    }
+    
+    public class Params_DonationForm
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public int postalCode { get; set; }
+        public string city { get; set; }
         public int amount { get; set; }
         public string email { get; set; }
+    }
+    #endregion
+
+    #region News
+    public partial class News
+    {
+        public List<News_source> sources { get; set; }
+        public List<Uploaded_file> My_Uploaded_files { get; set; }
+
     }
     #endregion
     #endregion

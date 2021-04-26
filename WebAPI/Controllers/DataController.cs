@@ -212,6 +212,49 @@ return oResult_Delete_News;
 #endregion
 }
 #endregion
+#region Delete_News_source
+[HttpPost]
+[Route("Delete_News_source")]
+public Result_Delete_News_source Delete_News_source(Params_Delete_News_source i_Params_Delete_News_source)
+{
+#region Declaration And Initialization Section.
+string i_Ticket = string.Empty;
+Result_Delete_News_source oResult_Delete_News_source = new Result_Delete_News_source();
+#endregion
+#region Body Section.
+try
+{
+
+
+BLC.BLC oBLC_Default = new BLC.BLC();
+BLCInitializer oBLCInitializer = new BLCInitializer();
+oBLCInitializer.UserID           = Convert.ToInt64(oBLC_Default.ResolveTicket(i_Ticket)["USER_ID"]);
+oBLCInitializer.OwnerID          = Convert.ToInt32(oBLC_Default.ResolveTicket(i_Ticket)["OWNER_ID"]);
+oBLCInitializer.ConnectionString = ConfigurationManager.AppSettings["CONN_STR"];
+oBLCInitializer.Messages_FilePath = ConfigurationManager.AppSettings["BLC_MESSAGES"];
+using (BLC.BLC oBLC = new BLC.BLC(oBLCInitializer))
+{
+oBLC.Delete_News_source(i_Params_Delete_News_source);
+oResult_Delete_News_source.My_Params_Delete_News_source = i_Params_Delete_News_source;
+}
+}
+catch(Exception ex)
+{
+if (ex.GetType().FullName != "BLC.BLCException")
+{
+oResult_Delete_News_source.ExceptionMsg = string.Format("Delete_News_source : {0}", ex.Message);
+}
+else
+{
+oResult_Delete_News_source.ExceptionMsg = ex.Message;
+}
+}
+#endregion
+#region Return Section
+return oResult_Delete_News_source;
+#endregion
+}
+#endregion
 #region Delete_Team_member
 [HttpPost]
 [Route("Delete_Team_member")]
@@ -415,6 +458,49 @@ oResult_Edit_News.ExceptionMsg = ex.Message;
 #endregion
 #region Return Section
 return oResult_Edit_News;
+#endregion
+}
+#endregion
+#region Edit_News_source
+[HttpPost]
+[Route("Edit_News_source")]
+public Result_Edit_News_source Edit_News_source(News_source i_News_source)
+{
+#region Declaration And Initialization Section.
+string i_Ticket = string.Empty;
+Result_Edit_News_source oResult_Edit_News_source = new Result_Edit_News_source();
+#endregion
+#region Body Section.
+try
+{
+
+
+BLC.BLC oBLC_Default = new BLC.BLC();
+BLCInitializer oBLCInitializer = new BLCInitializer();
+oBLCInitializer.UserID           = Convert.ToInt64(oBLC_Default.ResolveTicket(i_Ticket)["USER_ID"]);
+oBLCInitializer.OwnerID          = Convert.ToInt32(oBLC_Default.ResolveTicket(i_Ticket)["OWNER_ID"]);
+oBLCInitializer.ConnectionString = ConfigurationManager.AppSettings["CONN_STR"];
+oBLCInitializer.Messages_FilePath = ConfigurationManager.AppSettings["BLC_MESSAGES"];
+using (BLC.BLC oBLC = new BLC.BLC(oBLCInitializer))
+{
+oBLC.Edit_News_source(i_News_source);
+oResult_Edit_News_source.My_News_source = i_News_source;
+}
+}
+catch(Exception ex)
+{
+if (ex.GetType().FullName != "BLC.BLCException")
+{
+oResult_Edit_News_source.ExceptionMsg = string.Format("Edit_News_source : {0}", ex.Message);
+}
+else
+{
+oResult_Edit_News_source.ExceptionMsg = ex.Message;
+}
+}
+#endregion
+#region Return Section
+return oResult_Edit_News_source;
 #endregion
 }
 #endregion
@@ -935,7 +1021,6 @@ return oResult_Get_User_By_USER_ID;
 public Result_Verify_Account Verify_Account(Params_Verify_Account i_Params_Verify_Account)
 {
 #region Declaration And Initialization Section.
-User oReturnValue = new User();
 string i_Ticket = string.Empty;
 Result_Verify_Account oResult_Verify_Account = new Result_Verify_Account();
 #endregion
@@ -948,8 +1033,7 @@ BLC.BLC oBLC_Default = new BLC.BLC();
 BLCInitializer oBLCInitializer = oBLC_Default.Prepare_BLCInitializer(i_Ticket,BLC.BLC.Enum_API_Method.Verify_Account);
 using (BLC.BLC oBLC = new BLC.BLC(oBLCInitializer))
 {
-oReturnValue = oBLC.Verify_Account(i_Params_Verify_Account);
-oResult_Verify_Account.My_Result = oReturnValue;
+oBLC.Verify_Account(i_Params_Verify_Account);
 oResult_Verify_Account.My_Params_Verify_Account = i_Params_Verify_Account;
 }
 }
@@ -1024,6 +1108,14 @@ public Params_Delete_News My_Params_Delete_News { get; set; }
 #endregion
 }
 #endregion
+#region Result_Delete_News_source
+public partial class Result_Delete_News_source : Action_Result
+{
+#region Properties.
+public Params_Delete_News_source My_Params_Delete_News_source { get; set; }
+#endregion
+}
+#endregion
 #region Result_Delete_Team_member
 public partial class Result_Delete_Team_member : Action_Result
 {
@@ -1053,6 +1145,14 @@ public partial class Result_Edit_News : Action_Result
 {
 #region Properties.
 public News My_News { get; set; }
+#endregion
+}
+#endregion
+#region Result_Edit_News_source
+public partial class Result_Edit_News_source : Action_Result
+{
+#region Properties.
+public News_source My_News_source { get; set; }
 #endregion
 }
 #endregion
@@ -1165,7 +1265,6 @@ public Params_Get_User_By_USER_ID My_Params_Get_User_By_USER_ID { get; set; }
 public partial class Result_Verify_Account : Action_Result
 {
 #region Properties.
-public User My_Result { get; set; }
 public Params_Verify_Account My_Params_Verify_Account { get; set; }
 #endregion
 }

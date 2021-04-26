@@ -51,6 +51,12 @@
 <ENTRY>Change_Password</ENTRY>
 </API_METHOD>
 <API_METHOD>
+<ENTRY>Edit_News_source</ENTRY>
+</API_METHOD>
+<API_METHOD>
+<ENTRY>Delete_News_source</ENTRY>
+</API_METHOD>
+<API_METHOD>
 <ENTRY>Get_User_By_USER_ID</ENTRY>
 </API_METHOD>
 </API_METHODS>

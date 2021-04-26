@@ -28,6 +28,14 @@ public partial class News
 #endregion
 }
 #endregion
+#region News_source
+public partial class News_source
+{
+#region Advanced Properties
+public News My_News {get;set;}
+#endregion
+}
+#endregion
 #region Owner
 public partial class Owner
 {

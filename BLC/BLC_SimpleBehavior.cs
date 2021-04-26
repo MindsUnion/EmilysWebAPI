@@ -26,6 +26,7 @@ public partial class BLC
 #region Members
 #region Used For Delete Operations
 private News _News;
+private News_source _News_source;
 private Owner _Owner;
 private Section _Section;
 private Team_member _Team_member;
@@ -35,6 +36,8 @@ private User _User;
 #region Stop Executing Flags For Edit and Delete Operations
 private bool _Stop_Edit_News_Execution;
 private bool _Stop_Delete_News_Execution;
+private bool _Stop_Edit_News_source_Execution;
+private bool _Stop_Delete_News_source_Execution;
 private bool _Stop_Edit_Owner_Execution;
 private bool _Stop_Delete_Owner_Execution;
 private bool _Stop_Edit_Section_Execution;
@@ -58,6 +61,18 @@ oTools.CopyPropValues(oDBEntry, oNews);
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Get_News_By_NEWS_ID");}
 return oNews;
+}
+public News_source Get_News_source_By_NEWS_SOURCE_ID(Params_Get_News_source_By_NEWS_SOURCE_ID i_Params_Get_News_source_By_NEWS_SOURCE_ID)
+{
+News_source oNews_source = null;
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_NEWS_SOURCE_ID");}
+#region Body Section.
+DALC.News_source oDBEntry = _AppContext.Get_News_source_By_NEWS_SOURCE_ID(i_Params_Get_News_source_By_NEWS_SOURCE_ID.NEWS_SOURCE_ID);
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_NEWS_SOURCE_ID");}
+return oNews_source;
 }
 public Owner Get_Owner_By_OWNER_ID(Params_Get_Owner_By_OWNER_ID i_Params_Get_Owner_By_OWNER_ID)
 {
@@ -150,6 +165,27 @@ oList.Add(oNews);
 }
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Get_News_By_NEWS_ID_List");}
+return oList;
+}
+public List<News_source> Get_News_source_By_NEWS_SOURCE_ID_List(Params_Get_News_source_By_NEWS_SOURCE_ID_List i_Params_Get_News_source_By_NEWS_SOURCE_ID_List)
+{
+News_source oNews_source = null;
+List<News_source> oList = new List<News_source>();
+Params_Get_News_source_By_NEWS_SOURCE_ID_List_SP oParams_Get_News_source_By_NEWS_SOURCE_ID_List_SP = new Params_Get_News_source_By_NEWS_SOURCE_ID_List_SP();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_NEWS_SOURCE_ID_List");}
+#region Body Section.
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_NEWS_SOURCE_ID_List(i_Params_Get_News_source_By_NEWS_SOURCE_ID_List.NEWS_SOURCE_ID_LIST);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_NEWS_SOURCE_ID_List");}
 return oList;
 }
 public List<Owner> Get_Owner_By_OWNER_ID_List(Params_Get_Owner_By_OWNER_ID_List i_Params_Get_Owner_By_OWNER_ID_List)
@@ -275,6 +311,46 @@ oList.Add(oNews);
 }
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Get_News_By_OWNER_ID");}
+return oList;
+}
+public List<News_source> Get_News_source_By_OWNER_ID(Params_Get_News_source_By_OWNER_ID i_Params_Get_News_source_By_OWNER_ID)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_OWNER_ID");}
+#region Body Section.
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_OWNER_ID(i_Params_Get_News_source_By_OWNER_ID.OWNER_ID);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_OWNER_ID");}
+return oList;
+}
+public List<News_source> Get_News_source_By_NEWS_ID(Params_Get_News_source_By_NEWS_ID i_Params_Get_News_source_By_NEWS_ID)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_NEWS_ID");}
+#region Body Section.
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_NEWS_ID(i_Params_Get_News_source_By_NEWS_ID.NEWS_ID);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_NEWS_ID");}
 return oList;
 }
 public List<Section> Get_Section_By_OWNER_ID(Params_Get_Section_By_OWNER_ID i_Params_Get_Section_By_OWNER_ID)
@@ -481,6 +557,26 @@ oList.Add(oUser);
 if (OnPostEvent_General != null){OnPostEvent_General("Get_User_By_USERNAME");}
 return oList;
 }
+public List<News_source> Get_News_source_By_NEWS_ID_List(Params_Get_News_source_By_NEWS_ID_List i_Params_Get_News_source_By_NEWS_ID_List)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_NEWS_ID_List");}
+#region Body Section.
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_NEWS_ID_List(i_Params_Get_News_source_By_NEWS_ID_List.NEWS_ID_LIST);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_NEWS_ID_List");}
+return oList;
+}
 public List<News> Get_News_By_Criteria(Params_Get_News_By_Criteria i_Params_Get_News_By_Criteria)
 {
 List<News> oList = new List<News>();
@@ -491,7 +587,7 @@ if (OnPreEvent_General != null){OnPreEvent_General("Get_News_By_Criteria");}
 if ((i_Params_Get_News_By_Criteria.OWNER_ID == null) || (i_Params_Get_News_By_Criteria.OWNER_ID == 0)) { i_Params_Get_News_By_Criteria.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_News_By_Criteria.START_ROW == null) { i_Params_Get_News_By_Criteria.START_ROW = 0; }
 if ((i_Params_Get_News_By_Criteria.END_ROW == null) || (i_Params_Get_News_By_Criteria.END_ROW == 0)) { i_Params_Get_News_By_Criteria.END_ROW = 1000000; }
-List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Criteria(i_Params_Get_News_By_Criteria.TITLE,i_Params_Get_News_By_Criteria.SUBTITLE,i_Params_Get_News_By_Criteria.DESCRIPTION,i_Params_Get_News_By_Criteria.IMG_NAME,i_Params_Get_News_By_Criteria.NEWS_SOURCE,i_Params_Get_News_By_Criteria.OWNER_ID,i_Params_Get_News_By_Criteria.START_ROW,i_Params_Get_News_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Criteria(i_Params_Get_News_By_Criteria.TITLE,i_Params_Get_News_By_Criteria.SUBTITLE,i_Params_Get_News_By_Criteria.DESCRIPTION,i_Params_Get_News_By_Criteria.IMG_NAME,i_Params_Get_News_By_Criteria.OWNER_ID,i_Params_Get_News_By_Criteria.START_ROW,i_Params_Get_News_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -512,11 +608,17 @@ List<News> oList = new List<News>();
 News oNews = new News();
 long? tmp_TOTAL_COUNT = 0;
 if (OnPreEvent_General != null){OnPreEvent_General("Get_News_By_Where");}
+#region PreEvent_Get_News_By_Where
+if (OnPreEvent_Get_News_By_Where != null)
+{
+OnPreEvent_Get_News_By_Where(i_Params_Get_News_By_Where);
+}
+#endregion
 #region Body Section.
 if ((i_Params_Get_News_By_Where.OWNER_ID == null) || (i_Params_Get_News_By_Where.OWNER_ID == 0)) { i_Params_Get_News_By_Where.OWNER_ID = this.OwnerID; }
 if (i_Params_Get_News_By_Where.START_ROW == null) { i_Params_Get_News_By_Where.START_ROW = 0; }
 if ((i_Params_Get_News_By_Where.END_ROW == null) || (i_Params_Get_News_By_Where.END_ROW == 0)) { i_Params_Get_News_By_Where.END_ROW = 1000000; }
-List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Where(i_Params_Get_News_By_Where.TITLE,i_Params_Get_News_By_Where.SUBTITLE,i_Params_Get_News_By_Where.DESCRIPTION,i_Params_Get_News_By_Where.IMG_NAME,i_Params_Get_News_By_Where.NEWS_SOURCE,i_Params_Get_News_By_Where.OWNER_ID,i_Params_Get_News_By_Where.START_ROW,i_Params_Get_News_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
+List<DALC.News> oList_DBEntries = _AppContext.Get_News_By_Where(i_Params_Get_News_By_Where.TITLE,i_Params_Get_News_By_Where.SUBTITLE,i_Params_Get_News_By_Where.DESCRIPTION,i_Params_Get_News_By_Where.IMG_NAME,i_Params_Get_News_By_Where.OWNER_ID,i_Params_Get_News_By_Where.START_ROW,i_Params_Get_News_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
 if (oList_DBEntries != null)
 {
 foreach (var oDBEntry in oList_DBEntries)
@@ -528,7 +630,63 @@ oList.Add(oNews);
 }
 i_Params_Get_News_By_Where.TOTAL_COUNT = tmp_TOTAL_COUNT;
 #endregion
+#region PostEvent_Get_News_By_Where
+if (OnPostEvent_Get_News_By_Where != null)
+{
+OnPostEvent_Get_News_By_Where(ref oList,i_Params_Get_News_By_Where);
+}
+#endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Get_News_By_Where");}
+return oList;
+}
+public List<News_source> Get_News_source_By_Criteria(Params_Get_News_source_By_Criteria i_Params_Get_News_source_By_Criteria)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+long? tmp_TOTAL_COUNT = 0;
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_Criteria");}
+#region Body Section.
+if ((i_Params_Get_News_source_By_Criteria.OWNER_ID == null) || (i_Params_Get_News_source_By_Criteria.OWNER_ID == 0)) { i_Params_Get_News_source_By_Criteria.OWNER_ID = this.OwnerID; }
+if (i_Params_Get_News_source_By_Criteria.START_ROW == null) { i_Params_Get_News_source_By_Criteria.START_ROW = 0; }
+if ((i_Params_Get_News_source_By_Criteria.END_ROW == null) || (i_Params_Get_News_source_By_Criteria.END_ROW == 0)) { i_Params_Get_News_source_By_Criteria.END_ROW = 1000000; }
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_Criteria(i_Params_Get_News_source_By_Criteria.NEWS_SOURCE_NAME,i_Params_Get_News_source_By_Criteria.OWNER_ID,i_Params_Get_News_source_By_Criteria.START_ROW,i_Params_Get_News_source_By_Criteria.END_ROW,ref tmp_TOTAL_COUNT);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+i_Params_Get_News_source_By_Criteria.TOTAL_COUNT = tmp_TOTAL_COUNT;
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_Criteria");}
+return oList;
+}
+public List<News_source> Get_News_source_By_Where(Params_Get_News_source_By_Where i_Params_Get_News_source_By_Where)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+long? tmp_TOTAL_COUNT = 0;
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_Where");}
+#region Body Section.
+if ((i_Params_Get_News_source_By_Where.OWNER_ID == null) || (i_Params_Get_News_source_By_Where.OWNER_ID == 0)) { i_Params_Get_News_source_By_Where.OWNER_ID = this.OwnerID; }
+if (i_Params_Get_News_source_By_Where.START_ROW == null) { i_Params_Get_News_source_By_Where.START_ROW = 0; }
+if ((i_Params_Get_News_source_By_Where.END_ROW == null) || (i_Params_Get_News_source_By_Where.END_ROW == 0)) { i_Params_Get_News_source_By_Where.END_ROW = 1000000; }
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_Where(i_Params_Get_News_source_By_Where.NEWS_SOURCE_NAME,i_Params_Get_News_source_By_Where.OWNER_ID,i_Params_Get_News_source_By_Where.START_ROW,i_Params_Get_News_source_By_Where.END_ROW,ref tmp_TOTAL_COUNT);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+i_Params_Get_News_source_By_Where.TOTAL_COUNT = tmp_TOTAL_COUNT;
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_Where");}
 return oList;
 }
 public List<Owner> Get_Owner_By_Criteria(Params_Get_Owner_By_Criteria i_Params_Get_Owner_By_Criteria)
@@ -831,6 +989,80 @@ i_Params_Get_User_By_Where.TOTAL_COUNT = tmp_TOTAL_COUNT;
 if (OnPostEvent_General != null){OnPostEvent_General("Get_User_By_Where");}
 return oList;
 }
+public List<News_source> Get_News_source_By_Criteria_InList(Params_Get_News_source_By_Criteria_InList i_Params_Get_News_source_By_Criteria_InList)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+long? tmp_TOTAL_COUNT = 0;
+Params_Get_News_source_By_Criteria_InList_SP oParams_Get_News_source_By_Criteria_InList_SP = new Params_Get_News_source_By_Criteria_InList_SP();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_Criteria_InList");}
+#region Body Section.
+if ((i_Params_Get_News_source_By_Criteria_InList.OWNER_ID == null) || (i_Params_Get_News_source_By_Criteria_InList.OWNER_ID == 0)) { i_Params_Get_News_source_By_Criteria_InList.OWNER_ID = this.OwnerID; }
+if (i_Params_Get_News_source_By_Criteria_InList.START_ROW == null) { i_Params_Get_News_source_By_Criteria_InList.START_ROW = 0; }
+if ((i_Params_Get_News_source_By_Criteria_InList.END_ROW == null) || (i_Params_Get_News_source_By_Criteria_InList.END_ROW == 0)) { i_Params_Get_News_source_By_Criteria_InList.END_ROW = 1000000; }
+oParams_Get_News_source_By_Criteria_InList_SP.OWNER_ID = i_Params_Get_News_source_By_Criteria_InList.OWNER_ID;
+oParams_Get_News_source_By_Criteria_InList_SP.NEWS_SOURCE_NAME = i_Params_Get_News_source_By_Criteria_InList.NEWS_SOURCE_NAME;
+if ( i_Params_Get_News_source_By_Criteria_InList.NEWS_ID_LIST == null)
+{
+i_Params_Get_News_source_By_Criteria_InList.NEWS_ID_LIST = new List<Int32?>();
+}
+oParams_Get_News_source_By_Criteria_InList_SP.NEWS_ID_LIST = oTools.Convert_List_To_Comma_Separated<Int32?>(i_Params_Get_News_source_By_Criteria_InList.NEWS_ID_LIST);
+oParams_Get_News_source_By_Criteria_InList_SP.START_ROW = i_Params_Get_News_source_By_Criteria_InList.START_ROW;
+oParams_Get_News_source_By_Criteria_InList_SP.END_ROW = i_Params_Get_News_source_By_Criteria_InList.END_ROW;
+oParams_Get_News_source_By_Criteria_InList_SP.TOTAL_COUNT = i_Params_Get_News_source_By_Criteria_InList.TOTAL_COUNT;
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_Criteria_InList(i_Params_Get_News_source_By_Criteria_InList.NEWS_SOURCE_NAME,i_Params_Get_News_source_By_Criteria_InList.NEWS_ID_LIST,i_Params_Get_News_source_By_Criteria_InList.OWNER_ID,i_Params_Get_News_source_By_Criteria_InList.START_ROW,i_Params_Get_News_source_By_Criteria_InList.END_ROW,ref tmp_TOTAL_COUNT);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+i_Params_Get_News_source_By_Criteria_InList.TOTAL_COUNT = oParams_Get_News_source_By_Criteria_InList_SP.TOTAL_COUNT;
+i_Params_Get_News_source_By_Criteria_InList.TOTAL_COUNT = tmp_TOTAL_COUNT;
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_Criteria_InList");}
+return oList;
+}
+public List<News_source> Get_News_source_By_Where_InList(Params_Get_News_source_By_Where_InList i_Params_Get_News_source_By_Where_InList)
+{
+List<News_source> oList = new List<News_source>();
+News_source oNews_source = new News_source();
+long? tmp_TOTAL_COUNT = 0;
+Params_Get_News_source_By_Where_InList_SP oParams_Get_News_source_By_Where_InList_SP = new Params_Get_News_source_By_Where_InList_SP();
+if (OnPreEvent_General != null){OnPreEvent_General("Get_News_source_By_Where_InList");}
+#region Body Section.
+if ((i_Params_Get_News_source_By_Where_InList.OWNER_ID == null) || (i_Params_Get_News_source_By_Where_InList.OWNER_ID == 0)) { i_Params_Get_News_source_By_Where_InList.OWNER_ID = this.OwnerID; }
+if (i_Params_Get_News_source_By_Where_InList.START_ROW == null) { i_Params_Get_News_source_By_Where_InList.START_ROW = 0; }
+if ((i_Params_Get_News_source_By_Where_InList.END_ROW == null) || (i_Params_Get_News_source_By_Where_InList.END_ROW == 0)) { i_Params_Get_News_source_By_Where_InList.END_ROW = 1000000; }
+oParams_Get_News_source_By_Where_InList_SP.OWNER_ID = i_Params_Get_News_source_By_Where_InList.OWNER_ID;
+oParams_Get_News_source_By_Where_InList_SP.NEWS_SOURCE_NAME = i_Params_Get_News_source_By_Where_InList.NEWS_SOURCE_NAME;
+if ( i_Params_Get_News_source_By_Where_InList.NEWS_ID_LIST == null)
+{
+i_Params_Get_News_source_By_Where_InList.NEWS_ID_LIST = new List<Int32?>();
+}
+oParams_Get_News_source_By_Where_InList_SP.NEWS_ID_LIST = oTools.Convert_List_To_Comma_Separated<Int32?>(i_Params_Get_News_source_By_Where_InList.NEWS_ID_LIST);
+oParams_Get_News_source_By_Where_InList_SP.START_ROW = i_Params_Get_News_source_By_Where_InList.START_ROW;
+oParams_Get_News_source_By_Where_InList_SP.END_ROW = i_Params_Get_News_source_By_Where_InList.END_ROW;
+oParams_Get_News_source_By_Where_InList_SP.TOTAL_COUNT = i_Params_Get_News_source_By_Where_InList.TOTAL_COUNT;
+List<DALC.News_source> oList_DBEntries = _AppContext.Get_News_source_By_Where_InList(i_Params_Get_News_source_By_Where_InList.NEWS_SOURCE_NAME,i_Params_Get_News_source_By_Where_InList.NEWS_ID_LIST,i_Params_Get_News_source_By_Where_InList.OWNER_ID,i_Params_Get_News_source_By_Where_InList.START_ROW,i_Params_Get_News_source_By_Where_InList.END_ROW,ref tmp_TOTAL_COUNT);
+if (oList_DBEntries != null)
+{
+foreach (var oDBEntry in oList_DBEntries)
+{
+oNews_source = new News_source();
+oTools.CopyPropValues(oDBEntry, oNews_source);
+oList.Add(oNews_source);
+}
+}
+i_Params_Get_News_source_By_Where_InList.TOTAL_COUNT = oParams_Get_News_source_By_Where_InList_SP.TOTAL_COUNT;
+i_Params_Get_News_source_By_Where_InList.TOTAL_COUNT = tmp_TOTAL_COUNT;
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Get_News_source_By_Where_InList");}
+return oList;
+}
 public void Delete_News(Params_Delete_News i_Params_Delete_News)
 {
 Params_Get_News_By_NEWS_ID oParams_Get_News_By_NEWS_ID = new Params_Get_News_By_NEWS_ID();
@@ -871,6 +1103,47 @@ throw new Exception(ex.Message);
 }
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Delete_News");}
+}
+public void Delete_News_source(Params_Delete_News_source i_Params_Delete_News_source)
+{
+Params_Get_News_source_By_NEWS_SOURCE_ID oParams_Get_News_source_By_NEWS_SOURCE_ID = new Params_Get_News_source_By_NEWS_SOURCE_ID();
+if (OnPreEvent_General != null){OnPreEvent_General("Delete_News_source");}
+#region Body Section.
+try
+{
+oParams_Get_News_source_By_NEWS_SOURCE_ID.NEWS_SOURCE_ID = i_Params_Delete_News_source.NEWS_SOURCE_ID;
+_News_source = Get_News_source_By_NEWS_SOURCE_ID_Adv(oParams_Get_News_source_By_NEWS_SOURCE_ID);
+if (_News_source != null)
+{
+using (TransactionScope oScope = new TransactionScope())
+{
+if (_Stop_Delete_News_source_Execution)
+{
+_Stop_Delete_News_source_Execution = false;
+return;
+}
+_AppContext.Delete_News_source(i_Params_Delete_News_source.NEWS_SOURCE_ID);
+oScope.Complete();
+}
+}
+}
+catch (BLCException blcex)
+{
+throw new BLCException(blcex.Message);
+}
+catch (Exception ex)
+{
+if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
+{
+throw new BLCException("Cannot be deleted because of related records in other tables");
+}
+else
+{
+throw new Exception(ex.Message);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Delete_News_source");}
 }
 public void Delete_Owner(Params_Delete_Owner i_Params_Delete_Owner)
 {
@@ -1113,6 +1386,80 @@ throw new Exception(ex.Message);
 }
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Delete_News_By_OWNER_ID");}
+}
+public void Delete_News_source_By_OWNER_ID(Params_Delete_News_source_By_OWNER_ID i_Params_Delete_News_source_By_OWNER_ID)
+{
+Params_Get_News_source_By_OWNER_ID oParams_Get_News_source_By_OWNER_ID = new Params_Get_News_source_By_OWNER_ID();
+List<News_source> _List_News_source = new List<News_source>();
+if (OnPreEvent_General != null){OnPreEvent_General("Delete_News_source_By_OWNER_ID");}
+#region Body Section.
+try
+{
+using (TransactionScope oScope = new TransactionScope())
+{
+if (_Stop_Delete_News_source_Execution)
+{
+_Stop_Delete_News_source_Execution = false;
+return;
+}
+_AppContext.Delete_News_source_By_OWNER_ID(i_Params_Delete_News_source_By_OWNER_ID.OWNER_ID);
+oScope.Complete();
+}
+}
+catch (BLCException blcex)
+{
+throw new BLCException(blcex.Message);
+}
+catch (Exception ex)
+{
+if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
+{
+throw new BLCException("Cannot be deleted because of related records in other tables");
+}
+else
+{
+throw new Exception(ex.Message);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Delete_News_source_By_OWNER_ID");}
+}
+public void Delete_News_source_By_NEWS_ID(Params_Delete_News_source_By_NEWS_ID i_Params_Delete_News_source_By_NEWS_ID)
+{
+Params_Get_News_source_By_NEWS_ID oParams_Get_News_source_By_NEWS_ID = new Params_Get_News_source_By_NEWS_ID();
+List<News_source> _List_News_source = new List<News_source>();
+if (OnPreEvent_General != null){OnPreEvent_General("Delete_News_source_By_NEWS_ID");}
+#region Body Section.
+try
+{
+using (TransactionScope oScope = new TransactionScope())
+{
+if (_Stop_Delete_News_source_Execution)
+{
+_Stop_Delete_News_source_Execution = false;
+return;
+}
+_AppContext.Delete_News_source_By_NEWS_ID(i_Params_Delete_News_source_By_NEWS_ID.NEWS_ID);
+oScope.Complete();
+}
+}
+catch (BLCException blcex)
+{
+throw new BLCException(blcex.Message);
+}
+catch (Exception ex)
+{
+if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
+{
+throw new BLCException("Cannot be deleted because of related records in other tables");
+}
+else
+{
+throw new Exception(ex.Message);
+}
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Delete_News_source_By_NEWS_ID");}
 }
 public void Delete_Section_By_OWNER_ID(Params_Delete_Section_By_OWNER_ID i_Params_Delete_Section_By_OWNER_ID)
 {
@@ -1478,7 +1825,6 @@ i_News.NEWS_ID
 ,i_News.SUBTITLE
 ,i_News.DESCRIPTION
 ,i_News.IMG_NAME
-,i_News.NEWS_SOURCE
 ,i_News.IS_DISPLAYABLE
 ,i_News.ENTRY_USER_ID
 ,i_News.ENTRY_DATE
@@ -1488,6 +1834,40 @@ oScope.Complete();
 }
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Edit_News");}
+}
+public void Edit_News_source(News_source i_News_source) 
+{
+Enum_EditMode oEditMode_Flag = Enum_EditMode.Update;
+if (i_News_source.NEWS_SOURCE_ID == -1)
+{
+oEditMode_Flag = Enum_EditMode.Add;
+}
+if (OnPreEvent_General != null){OnPreEvent_General("Edit_News_source");}
+#region Body Section.
+if ((i_News_source.NEWS_SOURCE_ID == null) || (i_News_source.NEWS_SOURCE_ID == 0)) { throw new BLCException("Missing primary key while calling Edit_News_source"); }
+i_News_source.ENTRY_USER_ID = this.UserID;
+i_News_source.ENTRY_DATE    = oTools.GetDateString(DateTime.Today);
+i_News_source.OWNER_ID      = this.OwnerID;
+using (TransactionScope oScope = new TransactionScope())
+{
+if (_Stop_Edit_News_source_Execution)
+{
+_Stop_Edit_News_source_Execution = false;
+return;
+}
+i_News_source.NEWS_SOURCE_ID = _AppContext.Edit_News_source
+(
+i_News_source.NEWS_SOURCE_ID
+,i_News_source.NEWS_SOURCE_NAME
+,i_News_source.NEWS_ID
+,i_News_source.ENTRY_USER_ID
+,i_News_source.ENTRY_DATE
+,i_News_source.OWNER_ID
+);
+oScope.Complete();
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Edit_News_source");}
 }
 public void Edit_Owner(Owner i_Owner) 
 {
@@ -1746,6 +2126,49 @@ oScope.Complete();
 }
 #endregion
 if (OnPostEvent_General != null){OnPostEvent_General("Edit_News_List");}
+}
+public void Edit_News_source_List(List<News_source> i_List_News_source)
+{
+if (OnPreEvent_General != null){OnPreEvent_General("Edit_News_source_List");}
+#region Body Section.
+using (TransactionScope oScope = new TransactionScope())
+{
+if (i_List_News_source != null)
+{
+foreach (var oRow in i_List_News_source)
+{
+Edit_News_source(oRow);
+}
+}
+oScope.Complete();
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Edit_News_source_List");}
+}
+public void Edit_News_source_List(Params_Edit_News_source_List i_Params_Edit_News_source_List)
+{
+if (OnPreEvent_General != null){OnPreEvent_General("Edit_News_source_List");}
+#region Body Section.
+using (TransactionScope oScope = new TransactionScope())
+{
+if (i_Params_Edit_News_source_List.My_List_To_Delete != null)
+{
+foreach (var oRow in i_Params_Edit_News_source_List.My_List_To_Delete)
+{
+Delete_News_source(new Params_Delete_News_source() { NEWS_SOURCE_ID = oRow.NEWS_SOURCE_ID });
+}
+}
+if (i_Params_Edit_News_source_List.My_List_To_Edit != null)
+{
+foreach (var oRow in i_Params_Edit_News_source_List.My_List_To_Edit)
+{
+Edit_News_source(oRow);
+}
+}
+oScope.Complete();
+}
+#endregion
+if (OnPostEvent_General != null){OnPostEvent_General("Edit_News_source_List");}
 }
 public void Edit_Owner_List(List<Owner> i_List_Owner)
 {

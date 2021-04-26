@@ -87,6 +87,10 @@ namespace BLC
         public delegate void PostEvent_Handler_Get_Team_member_By_EMAIL(List<Team_member> i_Result, Params_Get_Team_member_By_EMAIL i_Params_Get_Team_member_By_EMAIL);
         public event PreEvent_Handler_Get_Team_member_By_EMAIL OnPreEvent_Get_Team_member_By_EMAIL;
         public event PostEvent_Handler_Get_Team_member_By_EMAIL OnPostEvent_Get_Team_member_By_EMAIL;
+        public delegate void PreEvent_Handler_Get_News_By_Where(Params_Get_News_By_Where i_Params_Get_News_By_Where);
+        public delegate void PostEvent_Handler_Get_News_By_Where(ref List<News> i_Result, Params_Get_News_By_Where i_Params_Get_News_By_Where);
+        public event PreEvent_Handler_Get_News_By_Where OnPreEvent_Get_News_By_Where;
+        public event PostEvent_Handler_Get_News_By_Where OnPostEvent_Get_News_By_Where;
         public delegate void PreEvent_Handler_Delete_Uploaded_file(Params_Delete_Uploaded_file i_Params_Delete_Uploaded_file);
         public delegate void PostEvent_Handler_Delete_Uploaded_file(Params_Delete_Uploaded_file i_Params_Delete_Uploaded_file);
         public event PreEvent_Handler_Delete_Uploaded_file OnPreEvent_Delete_Uploaded_file;
@@ -117,38 +121,38 @@ namespace BLC
             this.OnPreEvent_Edit_Uploaded_file += BLC_OnPreEvent_Edit_Uploaded_file;
             this.OnPreEvent_Delete_Uploaded_file += BLC_OnPreEvent_Delete_Uploaded_file;
             this.OnPreEvent_Delete_Uploaded_file_By_REL_ENTITY_REL_KEY_REL_FIELD += BLC_OnPreEvent_Delete_Uploaded_file_By_REL_ENTITY_REL_KEY_REL_FIELD;
-            this.OnPostEvent_Get_Team_member_By_OWNER_ID += BLC_OnPostEvent_Get_Team_member_By_OWNER_ID_Uploaded_Files;
+            //this.OnPostEvent_Get_Team_member_By_OWNER_ID += BLC_OnPostEvent_Get_Team_member_By_OWNER_ID_Uploaded_Files;
             //this.OnPostEvent_Get_Section_By_SECTION_ID += BLC_OnPostEvent_Get_Section_By_SECTION_ID_Uploaded_Files;
             #endregion
         }
         #endregion
         #region BLC_OnPostEvent_Get_Team_member_By_OWNER_ID_Uploaded_Files
-        private void BLC_OnPostEvent_Get_Team_member_By_OWNER_ID_Uploaded_Files(ref List<Team_member> i_Result, Params_Get_Team_member_By_OWNER_ID i_Params_Get_Team_member_By_OWNER_ID)
-        {
-            #region Declaration And Initialization Section.
-            Uploaded_file oUploaded_file = new Uploaded_file();
-            List<Uploaded_file> oList_Uploaded_files = new List<Uploaded_file>();
-            string str_WEB_PATH = ConfigurationManager.AppSettings["WEB_PATH"].ToString();
-            #endregion
-            if (i_Result != null)
-            {
-                foreach (var oRow_Team_member in i_Result)
-                {
-                    #region Images
-                    oRow_Team_member.My_Uploaded_files = Get_Uploaded_Files("TBL_TEAM_MEMBER", "TEAM_MEMBER_IMAGE", oRow_Team_member.TEAM_MEMBER_ID);
+        //private void BLC_OnPostEvent_Get_Team_member_By_OWNER_ID_Uploaded_Files(ref List<Team_member> i_Result, Params_Get_Team_member_By_OWNER_ID i_Params_Get_Team_member_By_OWNER_ID)
+        //{
+        //    #region Declaration And Initialization Section.
+        //    Uploaded_file oUploaded_file = new Uploaded_file();
+        //    List<Uploaded_file> oList_Uploaded_files = new List<Uploaded_file>();
+        //    string str_WEB_PATH = ConfigurationManager.AppSettings["WEB_PATH"].ToString();
+        //    #endregion
+        //    if (i_Result != null)
+        //    {
+        //        foreach (var oRow_Team_member in i_Result)
+        //        {
+        //            #region Images
+        //            oRow_Team_member.My_Uploaded_files = Get_Uploaded_Files("TBL_TEAM_MEMBER", "TEAM_MEMBER_IMAGE", oRow_Team_member.TEAM_MEMBER_ID);
 
-                    if (oRow_Team_member.My_Uploaded_files != null)
-                    {
-                        foreach (var oRow_Uploaded_file in oRow_Team_member.My_Uploaded_files)
-                        {
-                            oRow_Uploaded_file.My_URL = string.Format("{0}/Files/Uploaded/{1}.{2}", str_WEB_PATH, oRow_Uploaded_file.UPLOADED_FILE_ID.ToString(), oRow_Uploaded_file.EXTENSION);
-                        }
-                    }
-                    #endregion
-                }
+        //            if (oRow_Team_member.My_Uploaded_files != null)
+        //            {
+        //                foreach (var oRow_Uploaded_file in oRow_Team_member.My_Uploaded_files)
+        //                {
+        //                    oRow_Uploaded_file.My_URL = string.Format("{0}/Files/Uploaded/{1}.{2}", str_WEB_PATH, oRow_Uploaded_file.UPLOADED_FILE_ID.ToString(), oRow_Uploaded_file.EXTENSION);
+        //                }
+        //            }
+        //            #endregion
+        //        }
 
-            }
-        }
+        //    }
+        //}
         #endregion
         //        #region BLC_OnPostEvent_Get_Section_By_SECTION_ID_Uploaded_Files
         //        private void BLC_OnPostEvent_Get_Section_By_SECTION_ID_Uploaded_Files(ref Section i_Result, Params_Get_Section_By_SECTION_ID i_Params_Get_Section_By_SECTION_ID)
@@ -251,3 +255,4 @@ namespace BLC
         #endregion
     }
 }
+
